@@ -202,7 +202,7 @@ int Munkres<T>::step4 ()
     }
 
     // 4. Erase all primes, uncover all columns and rows,
-    std::replace_if (mask_matrix.begin (), mask_matrix.end (), [](char & x){return x == PRIME;}, NORMAL);
+    std::replace (mask_matrix.begin (), mask_matrix.end (), PRIME, NORMAL);
     std::fill_n (row_mask, size, false);
     std::fill_n (col_mask, size, false);
 
