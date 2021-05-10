@@ -78,10 +78,13 @@ struct matrix_base
         size_t r, c;
     };
 
+    template <typename M>
+    using const_iterator = iterator<const M>;
+
     iterator<matrix_base> begin () {return iterator<matrix_base> {* this, 0, 0};}
     iterator<matrix_base> end   () {return iterator<matrix_base> {* this, rows (), 0};}
-    iterator<const matrix_base> begin () const {return iterator<const matrix_base> {* this, 0, 0};}
-    iterator<const matrix_base> end   () const {return iterator<const matrix_base> {* this, rows (), 0};}
+    const_iterator<matrix_base> begin () const {return const_iterator<matrix_base> {* this, 0, 0};}
+    const_iterator<matrix_base> end   () const {return const_iterator<matrix_base> {* this, rows (), 0};}
 };
 
 }// namespace munkres_cpp
