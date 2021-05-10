@@ -19,7 +19,7 @@ test_job:
         - cd ${BUILD_DIR}/tests && ./munkrestest
         - cd ${BUILD_DIR}
         - make coverage
-        - gcovr --exclude '../tests' --exclude 'googletest' -r ..
+        - gcovr --exclude '../tests' --exclude 'tests/googletest' -r ..
     only:
         - devel
 

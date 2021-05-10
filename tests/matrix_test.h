@@ -61,7 +61,7 @@ typedef ::testing::Types <
     , munkres_cpp::Matrix               <double>
     , munkres_cpp::Matrix               <long double>
     > TypesMatrixMunkres;
-TYPED_TEST_CASE (MunkresTestMatrixMunkres, TypesMatrixMunkres);
+TYPED_TEST_SUITE (MunkresTestMatrixMunkres, TypesMatrixMunkres);
 
 template <typename T> class MunkresTestMatrixArmadillo : public ::testing::Test {};
 typedef ::testing::Types <
@@ -79,7 +79,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_armadillo     <double>
     #endif
     > TypesMatrixArmadillo;
-TYPED_TEST_CASE (MunkresTestMatrixArmadillo, TypesMatrixArmadillo);
+TYPED_TEST_SUITE (MunkresTestMatrixArmadillo, TypesMatrixArmadillo);
 
 template <typename T> class MunkresTestMatrixBoost : public ::testing::Test {};
 typedef ::testing::Types <
@@ -99,7 +99,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_boost         <long double>
     #endif
     > TypesMatrixBoost;
-TYPED_TEST_CASE (MunkresTestMatrixBoost, TypesMatrixBoost);
+TYPED_TEST_SUITE (MunkresTestMatrixBoost, TypesMatrixBoost);
 
 template <typename T> class MunkresTestMatrixEigen : public ::testing::Test {};
 typedef ::testing::Types <
@@ -119,7 +119,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_eigen         <long double>
     #endif
     > TypesMatrixEigen;
-TYPED_TEST_CASE (MunkresTestMatrixEigen, TypesMatrixEigen);
+TYPED_TEST_SUITE (MunkresTestMatrixEigen, TypesMatrixEigen);
 
 template <typename T> class MunkresTestMatrixOpencv : public ::testing::Test {};
 typedef ::testing::Types <
@@ -133,7 +133,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_opencv        <double>
     #endif
     > TypesMatrixOpencv;
-TYPED_TEST_CASE (MunkresTestMatrixOpencv, TypesMatrixOpencv);
+TYPED_TEST_SUITE (MunkresTestMatrixOpencv, TypesMatrixOpencv);
 
 template <typename T> class MunkresTestMatrixQt : public ::testing::Test {};
 typedef ::testing::Types <
@@ -153,7 +153,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_qt            <long double,             3, 3>
     #endif
     > TypesMatrixQt;
-TYPED_TEST_CASE (MunkresTestMatrixQt, TypesMatrixQt);
+TYPED_TEST_SUITE (MunkresTestMatrixQt, TypesMatrixQt);
 
 template <typename T> class MunkresTestMatrixStd2dvector : public ::testing::Test {};
 typedef ::testing::Types <
@@ -171,7 +171,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_std_2d_vector <double>
     , munkres_cpp::matrix_std_2d_vector <long double>
     > TypesMatrixStd2dvector;
-TYPED_TEST_CASE (MunkresTestMatrixStd2dvector, TypesMatrixStd2dvector);
+TYPED_TEST_SUITE (MunkresTestMatrixStd2dvector, TypesMatrixStd2dvector);
 
 
 
@@ -229,7 +229,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_std_2d_vector <double>
     , munkres_cpp::matrix_std_2d_vector <long double>
     > TypesSigned;
-TYPED_TEST_CASE (MunkresTestSigned, TypesSigned);
+TYPED_TEST_SUITE (MunkresTestSigned, TypesSigned);
 
 
 
@@ -260,7 +260,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_std_2d_vector <double>
     , munkres_cpp::matrix_std_2d_vector <long double>
     > TypesFloating;
-TYPED_TEST_CASE (MunkresTestFloating, TypesFloating);
+TYPED_TEST_SUITE (MunkresTestFloating, TypesFloating);
 
 
 
@@ -283,7 +283,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_std_2d_vector <double>
     , munkres_cpp::matrix_std_2d_vector <long double>
     > TypesFloatingResizeable;
-TYPED_TEST_CASE (MunkresTestFloatingResizeable, TypesFloatingResizeable);
+TYPED_TEST_SUITE (MunkresTestFloatingResizeable, TypesFloatingResizeable);
 
 
 
