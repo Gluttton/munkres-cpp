@@ -2,7 +2,7 @@
 ExternalProject_Add (
     benchmark
     GIT_REPOSITORY "https://github.com/google/benchmark.git"
-    GIT_TAG "v1.1.0"
+    GIT_TAG "v1.5.3"
     CMAKE_ARGS "-DBENCHMARK_ENABLE_TESTING=OFF;-DCMAKE_BUILD_TYPE=Release"
     SOURCE_DIR "${PROJECT_BINARY_DIR}/benchmark"
     BINARY_DIR "${PROJECT_BINARY_DIR}/benchmark"
@@ -25,6 +25,7 @@ add_dependencies (munkresbenchmark_google.bin benchmark)
 ExternalProject_Add (
     hayai
     GIT_REPOSITORY "https://github.com/nickbruun/hayai.git"
+    GIT_TAG "v1.0.2"
     SOURCE_DIR "${PROJECT_BINARY_DIR}/hayai"
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
@@ -45,7 +46,7 @@ add_dependencies (munkresbenchmark_hayai.bin hayai)
 ExternalProject_Add (
     Celero
     GIT_REPOSITORY "https://github.com/DigitalInBlue/Celero.git"
-    GIT_TAG "v2.2.0"
+    GIT_TAG "v2.8.2"
     PATCH_COMMAND eval "sed 's/CACHE.*FORCE//g' CMakeLists.txt > CMakeLists.mod && mv CMakeLists.mod CMakeLists.txt"
     CMAKE_ARGS "-DCELERO_ENABLE_EXPERIMENTS=OFF;-DCMAKE_BUILD_TYPE=Release"
     SOURCE_DIR "${PROJECT_BINARY_DIR}/Celero"

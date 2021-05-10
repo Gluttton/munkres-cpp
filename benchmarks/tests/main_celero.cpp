@@ -20,7 +20,7 @@ class MunkresFixture : public celero::TestFixture
         {
         }
 
-        void setUp (int64_t) override
+        void setUp (const celero::TestFixture::ExperimentValue &) override
         {
             matrix = * matrices [i];
         }
