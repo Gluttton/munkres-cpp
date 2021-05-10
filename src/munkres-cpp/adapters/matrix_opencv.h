@@ -20,7 +20,7 @@
 #define _MUNKRES_ADAPTERS_OPENCV_MATRIX_H_
 
 #include "munkres-cpp/matrix_base.h"
-#include <cv.hpp>
+#include <opencv2/core/mat.hpp>
 
 namespace munkres_cpp
 {
