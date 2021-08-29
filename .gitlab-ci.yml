@@ -9,7 +9,6 @@ test_job:
     stage: test
     image: registry.gitlab.com/gluttton/munkres-cpp
     before_script:
-        - git checkout devel
         - BUILD_DIR=`pwd`/build
         - mkdir -p ${BUILD_DIR}
         - cd ${BUILD_DIR}
@@ -22,13 +21,13 @@ test_job:
         - gcovr --exclude '../tests' --exclude 'tests/googletest' -r ..
     only:
         - devel
+        - merge_requests
 
 
 examples_job:
     stage: examples
     image: registry.gitlab.com/gluttton/munkres-cpp
     before_script:
-        - git checkout devel
         - BUILD_DIR=`pwd`/build
         - mkdir -p ${BUILD_DIR}
         - cd ${BUILD_DIR}
@@ -37,13 +36,13 @@ examples_job:
         - make examples
     only:
         - devel
+        - merge_requests
 
 
 benchmarks_job:
     stage: benchmarks
     image: registry.gitlab.com/gluttton/munkres-cpp
     before_script:
-        - git checkout devel
         - BUILD_DIR=`pwd`/build
         - mkdir -p ${BUILD_DIR}
         - cd ${BUILD_DIR}
@@ -64,13 +63,13 @@ benchmarks_job:
         - make benchmarks
     only:
         - devel
+        - merge_requests
 
 
 cppcheck_job:
     stage: cppcheck
     image: registry.gitlab.com/gluttton/munkres-cpp
     before_script:
-        - git checkout devel
         - BUILD_DIR=`pwd`/build
         - mkdir -p ${BUILD_DIR}
         - cd ${BUILD_DIR}
@@ -80,4 +79,5 @@ cppcheck_job:
         - cat cppcheck.report
     only:
         - devel
+        - merge_requests
 
