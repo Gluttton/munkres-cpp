@@ -28,6 +28,11 @@ TYPED_TEST (MunkresTestMatrixMunkres, resize_From1x1To2x2WithDefaultValueDefault
     resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
 }
 
+TYPED_TEST (MunkresTestMatrixArmadillo, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
+{
+    resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
+}
+
 TYPED_TEST (MunkresTestMatrixBoost, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
 {
     resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
@@ -67,6 +72,11 @@ void resize_From1x1To5x5WithDefaultValueDefaulted_Success ()
 }
 
 TYPED_TEST (MunkresTestMatrixMunkres, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
+{
+    resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
+}
+
+TYPED_TEST (MunkresTestMatrixArmadillo, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
 {
     resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
 }
@@ -116,6 +126,11 @@ TYPED_TEST (MunkresTestMatrixMunkres, resize_From5x5To3x3WithDefaultValueDefault
     resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
 }
 
+TYPED_TEST (MunkresTestMatrixArmadillo, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
+{
+    resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
+}
+
 TYPED_TEST (MunkresTestMatrixBoost, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
 {
     resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
@@ -155,6 +170,11 @@ void resize_From2x2To4x4WithDefaultValueExplicit_Success ()
 }
 
 TYPED_TEST (MunkresTestMatrixMunkres, resize_From2x2To4x4WithDefaultValueExplicit_Success)
+{
+    resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
+}
+
+TYPED_TEST (MunkresTestMatrixArmadillo, resize_From2x2To4x4WithDefaultValueExplicit_Success)
 {
     resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
 }

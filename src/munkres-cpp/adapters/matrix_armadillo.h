@@ -67,6 +67,33 @@ class matrix_armadillo : public matrix_base<T>, public arma::Mat<T>
         {
             return arma::Mat<T>::n_rows;
         }
+
+        void resize (size_t rows, size_t columns, T value = T (0) ) override
+        {
+            if (rows == arma::Mat<T>::n_rows && columns == arma::Mat<T>::n_cols) {
+                return;
+            }
+
+            const auto rows_old = arma::Mat<T>::n_rows;
+            const auto columns_old = arma::Mat<T>::n_cols;
+
+            arma::Mat<T>::resize(rows, columns);
+
+            if (rows_old < rows) {
+                for (size_t i = rows_old; i < rows; ++i) {
+                    for (size_t j = 0; j < columns; ++j) {
+                        this->operator() (i, j) = value;
+                    }
+                }
+            }
+            if (columns_old < columns) {
+                for (size_t i = columns_old; i < columns; ++i) {
+                    for (size_t j = 0; j < rows; ++j) {
+                        this->operator() (j, i) = value;
+                    }
+                }
+            }
+        }
 };
 
 }// namespace munkres_cpp

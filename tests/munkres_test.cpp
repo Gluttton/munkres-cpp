@@ -475,6 +475,11 @@ TYPED_TEST (MunkresTestMatrixMunkres, solve_3x2_NonObviousSolution_Success)
     solve_3x2_NonObviousSolution_Success<TypeParam> ();
 }
 
+TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x2_NonObviousSolution_Success)
+{
+    solve_3x2_NonObviousSolution_Success<TypeParam> ();
+}
+
 TYPED_TEST (MunkresTestMatrixBoost, solve_3x2_NonObviousSolution_Success)
 {
     solve_3x2_NonObviousSolution_Success<TypeParam> ();
@@ -521,6 +526,11 @@ TYPED_TEST (MunkresTestMatrixMunkres, solve_3x2_NonObviousSolutionCase002_Succes
     solve_3x2_NonObviousSolutionCase002_Success<TypeParam> ();
 }
 
+TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x2_NonObviousSolutionCase002_Success)
+{
+    solve_3x2_NonObviousSolutionCase002_Success<TypeParam> ();
+}
+
 TYPED_TEST (MunkresTestMatrixBoost, solve_3x2_NonObviousSolutionCase002_Success)
 {
     solve_3x2_NonObviousSolutionCase002_Success<TypeParam> ();
@@ -562,6 +572,11 @@ void solve_2x3_NonObviousSolutionCase003_Success ()
 }
 
 TYPED_TEST (MunkresTestMatrixMunkres, solve_2x3_NonObviousSolutionCase003_Success)
+{
+    solve_2x3_NonObviousSolutionCase003_Success<TypeParam> ();
+}
+
+TYPED_TEST (MunkresTestMatrixArmadillo, solve_2x3_NonObviousSolutionCase003_Success)
 {
     solve_2x3_NonObviousSolutionCase003_Success<TypeParam> ();
 }
@@ -619,6 +634,11 @@ TYPED_TEST (MunkresTestMatrixMunkres, solve_4x3_NonObviousSolutionCase004_Succes
     solve_4x3_NonObviousSolutionCase004_Success<TypeParam> ();
 }
 
+TYPED_TEST (MunkresTestMatrixArmadillo, solve_4x3_NonObviousSolutionCase004_Success)
+{
+    solve_4x3_NonObviousSolutionCase004_Success<TypeParam> ();
+}
+
 TYPED_TEST (MunkresTestMatrixBoost, solve_4x3_NonObviousSolutionCase004_Success)
 {
     solve_4x3_NonObviousSolutionCase004_Success<TypeParam> ();
@@ -668,6 +688,11 @@ void solve_3x4_NonObviousSolutionCase005_Success ()
 }
 
 TYPED_TEST (MunkresTestMatrixMunkres, solve_3x4_NonObviousSolutionCase005_Success)
+{
+    solve_3x4_NonObviousSolutionCase005_Success<TypeParam> ();
+}
+
+TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x4_NonObviousSolutionCase005_Success)
 {
     solve_3x4_NonObviousSolutionCase005_Success<TypeParam> ();
 }

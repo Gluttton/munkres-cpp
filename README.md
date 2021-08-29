@@ -34,12 +34,12 @@ But in the project not used OS or compiler specific features (types, attributes,
 For easy integration of the library into existing projects, adapters are provided for several of the most well-known libraries.  
 
 Full support (square and rectangular matrices):  
+ - Armadillo;  
  - boost;  
  - Eigen;  
  - matrices based on `std::vector`.  
 
 Partial support (square matrices only):  
- - Armadillo;  
  - OpenCV;  
  - Qt.  
 

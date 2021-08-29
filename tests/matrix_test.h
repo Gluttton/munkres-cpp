@@ -269,6 +269,10 @@ typedef ::testing::Types <
       munkres_cpp::Matrix               <float>
     , munkres_cpp::Matrix               <double>
     , munkres_cpp::Matrix               <long double>
+    #ifdef MUNKRES_CPP_ARMADILLO
+    , munkres_cpp::matrix_armadillo     <float>
+    , munkres_cpp::matrix_armadillo     <double>
+    #endif
     #ifdef MUNKRES_CPP_BOOST
     , munkres_cpp::matrix_boost         <float>
     , munkres_cpp::matrix_boost         <double>
