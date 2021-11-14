@@ -43,6 +43,11 @@ TYPED_TEST (MunkresTestMatrixEigen, resize_From1x1To2x2WithDefaultValueDefaulted
     resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
 }
 
+TYPED_TEST (MunkresTestMatrixOpencv, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
+{
+    resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
+}
+
 TYPED_TEST (MunkresTestMatrixStd2dvector, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
 {
     resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
@@ -87,6 +92,11 @@ TYPED_TEST (MunkresTestMatrixBoost, resize_From1x1To5x5WithDefaultValueDefaulted
 }
 
 TYPED_TEST (MunkresTestMatrixEigen, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
+{
+    resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
+}
+
+TYPED_TEST (MunkresTestMatrixOpencv, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
 {
     resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
 }
@@ -141,6 +151,11 @@ TYPED_TEST (MunkresTestMatrixEigen, resize_From5x5To3x3WithDefaultValueDefaulted
     resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
 }
 
+TYPED_TEST (MunkresTestMatrixOpencv, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
+{
+    resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
+}
+
 TYPED_TEST (MunkresTestMatrixStd2dvector, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
 {
     resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
@@ -185,6 +200,11 @@ TYPED_TEST (MunkresTestMatrixBoost, resize_From2x2To4x4WithDefaultValueExplicit_
 }
 
 TYPED_TEST (MunkresTestMatrixEigen, resize_From2x2To4x4WithDefaultValueExplicit_Success)
+{
+    resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
+}
+
+TYPED_TEST (MunkresTestMatrixOpencv, resize_From2x2To4x4WithDefaultValueExplicit_Success)
 {
     resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
 }

@@ -21,6 +21,7 @@
 
 #include "munkres-cpp/matrix_base.h"
 #include <opencv2/core/mat.hpp>
+#include <opencv2/core/core.hpp>
 
 namespace munkres_cpp
 {
@@ -77,6 +78,25 @@ class matrix_opencv : public matrix_base<T>, public cv::Mat_<T>
         size_t rows () const override
         {
             return cv::Mat_<T>::rows;
+        }
+
+        void resize (size_t rows, size_t columns, T value = T (0) ) override
+        {
+            if (rows < this->rows () ) {
+                * this = this->rowRange (0, rows);
+            }
+            if (columns < this->columns () ) {
+                * this = this->colRange (0, columns);
+            }
+
+            if (rows > this->rows () ) {
+                cv::Mat_<T> r (rows - this->rows (), this->columns (), value);
+                cv::vconcat (* this, r, * this);
+            }
+            if (columns > this->columns () ) {
+                cv::Mat_<T> c (this->rows (), columns - this->columns (), value);
+                cv::hconcat (* this, c, * this);
+            }
         }
 };
 

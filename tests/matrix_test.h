@@ -283,6 +283,10 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_eigen         <double>
     , munkres_cpp::matrix_eigen         <long double>
     #endif
+    #ifdef MUNKRES_CPP_OPENCV
+    , munkres_cpp::matrix_opencv        <float>
+    , munkres_cpp::matrix_opencv        <double>
+    #endif
     , munkres_cpp::matrix_std_2d_vector <float>
     , munkres_cpp::matrix_std_2d_vector <double>
     , munkres_cpp::matrix_std_2d_vector <long double>

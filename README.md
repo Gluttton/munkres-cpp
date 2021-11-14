@@ -37,10 +37,10 @@ Full support (square and rectangular matrices):
  - Armadillo;  
  - boost;  
  - Eigen;  
+ - OpenCV;  
  - matrices based on `std::vector`.  
 
 Partial support (square matrices only):  
- - OpenCV;  
  - Qt.  
 
 
