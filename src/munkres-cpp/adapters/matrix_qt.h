@@ -21,6 +21,7 @@
 
 #include "munkres-cpp/matrix_base.h"
 #include <QGenericMatrix>
+#include <stdexcept>
 
 namespace munkres_cpp
 {
@@ -62,6 +63,14 @@ class matrix_qt : public matrix_base<T>, public QGenericMatrix<N, M, T>
         size_t rows () const override
         {
             return N;
+        }
+
+        void resize (size_t rows, size_t columns, T value = T (0) ) override
+        {
+            (void) value;
+            if (rows != this->rows () || columns != this->columns () ) {
+                throw std::logic_error ("Called function with inappropriate default implementation.");
+            }
         }
 };
 

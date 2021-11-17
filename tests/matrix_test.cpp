@@ -240,41 +240,6 @@ class MatrixTest : public ::testing::Test
 
 
 
-class non_resizable_matrix : public munkres_cpp::matrix_base<int>
-{
-    public:
-        ~non_resizable_matrix () override = default;
-        const int & operator () (const size_t, const size_t) const override {return value;};
-              int & operator () (const size_t, const size_t)       override {return value;};
-        size_t columns () const override {return 1;};
-        size_t rows    () const override {return 1;};
-        int value;
-};
-
-
-
-TEST_F (MatrixTest, resize_NonImplementResize_Throw)
-{
-    // Arrange.
-    non_resizable_matrix m;
-
-    // Act. Assert
-    EXPECT_THROW (m.resize (2, 2), std::logic_error);
-}
-
-
-
-TEST_F (MatrixTest, resize_NonImplementResize_NoThrow)
-{
-    // Arrange.
-    non_resizable_matrix m;
-
-    // Act. Assert
-    EXPECT_NO_THROW (m.resize (1, 1) );
-}
-
-
-
 TEST_F (MatrixTest, operatorAssignment_0x0_Success)
 {
     // Arrange.

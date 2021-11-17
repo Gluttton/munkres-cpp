@@ -21,7 +21,6 @@
 
 #include <limits>
 #include <cmath>
-#include <stdexcept>
 #include <iterator>
 
 
@@ -40,14 +39,10 @@ struct matrix_base
     virtual value_type & operator () (size_t, size_t) = 0;
     virtual size_t columns () const = 0;
     virtual size_t rows () const = 0;
+    virtual void resize (size_t, size_t, value_type = value_type (0) ) = 0;
 
     // Default implementation.
     virtual ~matrix_base () = default;
-    virtual void resize (size_t rows, size_t columns, value_type = value_type (0) )
-    {
-        if (rows != this->rows () || columns != this->columns () )
-            throw std::logic_error ("Called function with inappropriate default implementation.");
-    }
 
     // Implementation.
     template <typename V = value_type>

@@ -62,6 +62,10 @@ class matrix_boost_adapter : public munkres_cpp::matrix_base<T>
             return data.size1 ();
         }
 
+        void resize (size_t, size_t, T) override
+        {
+        }
+
     private:
         boost::numeric::ublas::matrix<T> & data;
 };
