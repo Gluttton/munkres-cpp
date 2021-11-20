@@ -20,6 +20,7 @@
 
 // Easy way to start with munkres-cpp.
 #include <munkres-cpp/munkres.h>
+#include <munkres-cpp/matrix.h>
 #include <munkres-cpp/utils.h>
 #include <cstdlib>
 
@@ -39,7 +40,7 @@ int main (int /*argc*/, char * /*argv*/[])
     // of the input data you should use it.
     if (munkres_cpp::is_data_valid (data) ) {
         // Next you need to create the problem solver and pass data to it.
-        munkres_cpp::Munkres<int> solver (data);
+        munkres_cpp::Munkres<int, munkres_cpp::Matrix> solver (data);
 
         // Now the matrix contains the solution.
         // Zero value represents selected values.

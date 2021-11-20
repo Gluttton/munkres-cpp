@@ -38,7 +38,7 @@ int main (int /*argc*/, char * /*argv*/[])
     // Don't forget! You are responsible for correctness of the input data.
 
     // Create the solver and pass data to it.
-    munkres_cpp::Munkres<double> solver (data);
+    munkres_cpp::Munkres<double, munkres_cpp::matrix_boost> solver (data);
 
     // Now the matrix contains the solution.
 

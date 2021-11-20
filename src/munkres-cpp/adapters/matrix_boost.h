@@ -32,6 +32,7 @@ class matrix_boost : public matrix_base<T>, public boost::numeric::ublas::matrix
         matrix_boost (size_t rows, size_t columns)
             : boost::numeric::ublas::matrix<T>::matrix (rows, columns)
         {
+            std::fill (matrix_base<T>::begin (), matrix_base<T>::end (), T (0) );
         }
 
         matrix_boost (const boost::numeric::ublas::matrix<T> & other)

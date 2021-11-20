@@ -37,37 +37,56 @@ template<class T>
 class matrix_boost_adapter : public munkres_cpp::matrix_base<T>
 {
     public:
-        matrix_boost_adapter (boost::numeric::ublas::matrix<T> & data)
-            : data {data}
+        matrix_boost_adapter (boost::numeric::ublas::matrix<T> * data = nullptr)
+            : data        {data}
+            , is_own_data {false}
         {
+            if (!data) {
+                data = new boost::numeric::ublas::matrix<T>;
+                is_own_data = true;
+            }
+        }
+
+        matrix_boost_adapter (size_t rows, size_t columns)
+            : data        {new boost::numeric::ublas::matrix<T> (rows, columns, 0)}
+            , is_own_data {true}
+        {
+        }
+
+        ~matrix_boost_adapter () override
+        {
+            if (is_own_data) {
+                delete data;
+            }
         }
 
         const T & operator () (const size_t row, const size_t column) const override
         {
-            return data (row, column);
+            return data->operator () (row, column);
         };
 
         T & operator () (const size_t row, const size_t column) override
         {
-            return data (row, column);
+            return data->operator () (row, column);
         }
 
         size_t columns () const override
         {
-            return data.size2 ();
+            return data->size2 ();
         }
 
         size_t rows () const override
         {
-            return data.size1 ();
+            return data->size1 ();
         }
 
-        void resize (size_t, size_t, T) override
+        void resize (size_t, size_t, T/* value = T (0) */) override
         {
         }
 
     private:
-        boost::numeric::ublas::matrix<T> & data;
+        boost::numeric::ublas::matrix<T> * data;
+        bool is_own_data;
 };
 
 int main (int /*argc*/, char * /*argv*/[])
@@ -80,10 +99,10 @@ int main (int /*argc*/, char * /*argv*/[])
     // Don't forget! You are responsible for correctness of the input data.
 
     // Create data adapter and pass your container to it.
-    matrix_boost_adapter<double> adapter (data);
+    matrix_boost_adapter<double> adapter (& data);
 
     // Create the solver and pass data to it.
-    munkres_cpp::Munkres<double> solver (adapter);
+    munkres_cpp::Munkres<double, matrix_boost_adapter> solver (adapter);
 
     // Now the matrix contains the solution.
 

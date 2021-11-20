@@ -6,18 +6,18 @@
 TYPED_TEST (MunkresTest, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
 {
     // Arrange.
-    TypeParam e (2, 2);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> e (2, 2);
     e(0, 0)=7.0;  e(0, 1)=0.0;
     e(1, 0)=0.0;  e(1, 1)=0.0;
 
-    TypeParam t (1, 1);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> t (1, 1);
     t(0, 0)=7.0;
 
     // Act.
     t.resize (2, 2);
 
     // Assert.
-    EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
+    EXPECT_PRED2 (MatrixCompare<typename TypeParam::matrix_type <typename TypeParam::value_type> >, e, t);
 }
 
 
@@ -25,21 +25,21 @@ TYPED_TEST (MunkresTest, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
 TYPED_TEST (MunkresTest, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
 {
     // Arrange.
-    TypeParam e (5, 5);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> e (5, 5);
     e(0, 0)=7.0;  e(0, 1)=0.0;  e(0, 2)=0.0;  e(0, 3)=0.0;  e(0, 4)=0.0;
     e(1, 0)=0.0;  e(1, 1)=0.0;  e(1, 2)=0.0;  e(1, 3)=0.0;  e(1, 4)=0.0;
     e(2, 0)=0.0;  e(2, 1)=0.0;  e(2, 2)=0.0;  e(2, 3)=0.0;  e(2, 4)=0.0;
     e(3, 0)=0.0;  e(3, 1)=0.0;  e(3, 2)=0.0;  e(3, 3)=0.0;  e(3, 4)=0.0;
     e(4, 0)=0.0;  e(4, 1)=0.0;  e(4, 2)=0.0;  e(4, 3)=0.0;  e(4, 4)=0.0;
 
-    TypeParam t (1, 1);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> t (1, 1);
     t(0, 0)=7.0;
 
     // Act.
     t.resize (5, 5);
 
     // Assert.
-    EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
+    EXPECT_PRED2 (MatrixCompare<typename TypeParam::matrix_type <typename TypeParam::value_type> >, e, t);
 }
 
 
@@ -47,12 +47,12 @@ TYPED_TEST (MunkresTest, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
 TYPED_TEST (MunkresTest, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
 {
     // Arrange.
-    TypeParam e (3, 3);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> e (3, 3);
     e(0, 0)=0.0;  e(0, 1)=0.1;  e(0, 2)=0.2;
     e(1, 0)=1.0;  e(1, 1)=1.1;  e(1, 2)=1.2;
     e(2, 0)=2.0;  e(2, 1)=2.1;  e(2, 2)=2.2;
 
-    TypeParam t (5, 5);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> t (5, 5);
     t(0, 0)=0.0;  t(0, 1)=0.1;  t(0, 2)=0.2;  t(0, 3)=0.3;  t(0, 4)=0.4;
     t(1, 0)=1.0;  t(1, 1)=1.1;  t(1, 2)=1.2;  t(1, 3)=1.3;  t(1, 4)=1.4;
     t(2, 0)=2.0;  t(2, 1)=2.1;  t(2, 2)=2.2;  t(2, 3)=2.3;  t(2, 4)=2.4;
@@ -63,7 +63,7 @@ TYPED_TEST (MunkresTest, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
     t.resize (3, 3);
 
     // Assert.
-    EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
+    EXPECT_PRED2 (MatrixCompare<typename TypeParam::matrix_type <typename TypeParam::value_type> >, e, t);
 }
 
 
@@ -71,13 +71,13 @@ TYPED_TEST (MunkresTest, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
 TYPED_TEST (MunkresTest, resize_From2x2To4x4WithDefaultValueExplicit_Success)
 {
     // Arrange.
-    TypeParam e (4, 4);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> e (4, 4);
     e(0, 0)=0.0;  e(0, 1)=0.1;  e(0, 2)=9.9;  e(0, 3)=9.9;
     e(1, 0)=1.0;  e(1, 1)=1.1;  e(1, 2)=9.9;  e(1, 3)=9.9;
     e(2, 0)=9.9;  e(2, 1)=9.9;  e(2, 2)=9.9;  e(2, 3)=9.9;
     e(3, 0)=9.9;  e(3, 1)=9.9;  e(3, 2)=9.9;  e(3, 3)=9.9;
 
-    TypeParam t (2, 2);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> t (2, 2);
     t(0, 0)=0.0;  t(0, 1)=0.1;
     t(1, 0)=1.0;  t(1, 1)=1.1;
 
@@ -85,7 +85,7 @@ TYPED_TEST (MunkresTest, resize_From2x2To4x4WithDefaultValueExplicit_Success)
     t.resize (4, 4, 9.9);
 
     // Assert.
-    EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
+    EXPECT_PRED2 (MatrixCompare<typename TypeParam::matrix_type <typename TypeParam::value_type> >, e, t);
 }
 
 
@@ -93,7 +93,7 @@ TYPED_TEST (MunkresTest, resize_From2x2To4x4WithDefaultValueExplicit_Success)
 TYPED_TEST (MunkresTest, resize_bad_alloc_Throw)
 {
     // Arrange.
-    TypeParam t (1, 1);
+    typename TypeParam::matrix_type <typename TypeParam::value_type> t (1, 1);
     t(0, 0)=0.0;
 
     // Act, Assert.

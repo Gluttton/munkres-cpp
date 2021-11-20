@@ -19,7 +19,6 @@
 #if !defined(_MUNKRES_H_)
 #define _MUNKRES_H_
 
-#include "munkres-cpp/matrix.h"
 #include <forward_list>
 #include <algorithm>
 
@@ -28,11 +27,11 @@
 namespace munkres_cpp
 {
 
-template<typename T>
+template<typename T, template <typename> class M>
 class Munkres
 {
     public:
-        Munkres (matrix_base<T> &);
+        Munkres (M<T> &);
 
     private:
         Munkres (const Munkres &) = delete;
@@ -46,8 +45,8 @@ class Munkres
         int step6 ();
 
         const size_t size;
-        matrix_base<T> & matrix;
-        Matrix<char> mask_matrix;
+        M<T> & matrix;
+        M<char> mask_matrix;
         bool * const row_mask;
         bool * const col_mask;
         size_t saverow;
@@ -62,8 +61,8 @@ class Munkres
 
 
 
-template<typename T>
-void minimize_along_direction (matrix_base<T> & matrix, bool over_columns)
+template<typename T, template <typename> class M>
+void minimize_along_direction (M<T> & matrix, bool over_columns)
 {
     // Look for a minimum value to subtract from all values along the "outer" direction.
     size_t i, j = 0, size = matrix.rows ();
@@ -85,8 +84,8 @@ void minimize_along_direction (matrix_base<T> & matrix, bool over_columns)
 
 
 
-template<typename T>
-bool Munkres<T>::find_uncovered_in_matrix (size_t & row, size_t & col) const
+template<typename T, template <typename> class M>
+bool Munkres<T, M>::find_uncovered_in_matrix (size_t & row, size_t & col) const
 {
     for (col = 0; col < size; col++)
         if (!col_mask[col])
@@ -100,8 +99,8 @@ bool Munkres<T>::find_uncovered_in_matrix (size_t & row, size_t & col) const
 
 
 
-template<typename T>
-int Munkres<T>::step1 ()
+template<typename T, template <typename> class M>
+int Munkres<T, M>::step1 ()
 {
     for (size_t row = 0; row < size; row++) {
         for (size_t col = 0; col < size; col++) {
@@ -123,8 +122,8 @@ int Munkres<T>::step1 ()
 
 
 
-template<typename T>
-int Munkres<T>::step2 ()
+template<typename T, template <typename> class M>
+int Munkres<T, M>::step2 ()
 {
     size_t covercount = 0;
 
@@ -140,8 +139,8 @@ int Munkres<T>::step2 ()
 
 
 
-template<typename T>
-int Munkres<T>::step3 ()
+template<typename T, template <typename> class M>
+int Munkres<T, M>::step3 ()
 {
     // Main Zero Search
     // 1. Find an uncovered Z in the distance matrix and prime it. If no such zero exists, go to Step 5
@@ -164,8 +163,8 @@ int Munkres<T>::step3 ()
 
 
 
-template<typename T>
-int Munkres<T>::step4 ()
+template<typename T, template <typename> class M>
+int Munkres<T, M>::step4 ()
 {
     // Seq contains pairs of row/column values where we have found
     // either a star or a prime that is part of the ``alternating sequence``.
@@ -212,8 +211,8 @@ int Munkres<T>::step4 ()
 
 
 
-template<typename T>
-int Munkres<T>::step5 ()
+template<typename T, template <typename> class M>
+int Munkres<T, M>::step5 ()
 {
     // New Zero Manufactures
     // 1. Let h be the smallest uncovered entry in the (modified) distance matrix.
@@ -249,8 +248,8 @@ int Munkres<T>::step5 ()
 //
 // Assignments are remaining 0 values
 // (extra 0 values are replaced with 1)
-template<typename T>
-Munkres<T>::Munkres (matrix_base<T> & matrix)
+template<typename T, template <typename> class M>
+Munkres<T, M>::Munkres (M<T> & matrix)
     : size {std::max (matrix.rows (), matrix.columns () )}
     , matrix {matrix}
     , mask_matrix {size, size}

@@ -32,7 +32,7 @@ class MunkresFixture : public celero::TestFixture
 
 BASELINE_F (Munkres, Solve, MunkresFixture, 5000, 1)
 {
-    munkres_cpp::Munkres<MUNKRES_CPP_VALUE_TYPE> munkres (matrix);
+    munkres_cpp::Munkres<MUNKRES_CPP_VALUE_TYPE, munkres_cpp::MUNKRES_CPP_MATRIX_TYPE> munkres (matrix);
 }
 
 

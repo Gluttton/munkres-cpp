@@ -36,6 +36,7 @@ class matrix_opencv : public matrix_base<T>, public cv::Mat_<T>
         matrix_opencv (size_t rows, size_t columns)
             : cv::Mat_<T>::Mat_ (rows, columns, cv::DataType<T>::type)
         {
+            std::fill (matrix_base<T>::begin (), matrix_base<T>::end (), T (0) );
         }
 
         matrix_opencv (const matrix_opencv<T> & other)

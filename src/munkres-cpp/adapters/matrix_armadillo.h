@@ -35,6 +35,7 @@ class matrix_armadillo : public matrix_base<T>, public arma::Mat<T>
         matrix_armadillo (size_t rows, size_t columns)
             : arma::Mat<T>::Mat (rows, columns)
         {
+            std::fill (matrix_base<T>::begin (), matrix_base<T>::end (), T (0) );
         }
 
         matrix_armadillo (const arma::Mat<T> & other)
@@ -93,6 +94,11 @@ class matrix_armadillo : public matrix_base<T>, public arma::Mat<T>
                     }
                 }
             }
+        }
+
+        bool is_zero (size_t row, size_t column) const
+        {
+            return matrix_base<T>::is_zero (row, column);
         }
 };
 

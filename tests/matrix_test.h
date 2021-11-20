@@ -46,91 +46,103 @@
 
 
 
+template<typename V, template <typename> class M>
+struct TypeHolder
+{
+    using value_type = V;
+
+    template <typename X>
+    using matrix_type = M <X>;
+};
+
+template <typename T>
+using matrix_qt33 = munkres_cpp::matrix_qt <T, 3, 3>;
+
 template <typename T> class MunkresTest : public ::testing::Test {};
 typedef ::testing::Types <
-      munkres_cpp::Matrix               <int8_t>
-    , munkres_cpp::Matrix               <uint8_t>
-    , munkres_cpp::Matrix               <int16_t>
-    , munkres_cpp::Matrix               <uint16_t>
-    , munkres_cpp::Matrix               <int32_t>
-    , munkres_cpp::Matrix               <uint32_t>
-    , munkres_cpp::Matrix               <int64_t>
-    , munkres_cpp::Matrix               <uint64_t>
-    , munkres_cpp::Matrix               <float>
-    , munkres_cpp::Matrix               <double>
-    , munkres_cpp::Matrix               <long double>
+      TypeHolder <int8_t,      munkres_cpp::Matrix>
+    , TypeHolder <uint8_t,     munkres_cpp::Matrix>
+    , TypeHolder <int16_t,     munkres_cpp::Matrix>
+    , TypeHolder <uint16_t,    munkres_cpp::Matrix>
+    , TypeHolder <int32_t,     munkres_cpp::Matrix>
+    , TypeHolder <uint32_t,    munkres_cpp::Matrix>
+    , TypeHolder <int64_t,     munkres_cpp::Matrix>
+    , TypeHolder <uint64_t,    munkres_cpp::Matrix>
+    , TypeHolder <float,       munkres_cpp::Matrix>
+    , TypeHolder <double,      munkres_cpp::Matrix>
+    , TypeHolder <long double, munkres_cpp::Matrix>
     #if ARMADILLO_FOUND == 1
-    , munkres_cpp::matrix_armadillo     <uint8_t>
-    , munkres_cpp::matrix_armadillo     <int16_t>
-    , munkres_cpp::matrix_armadillo     <uint16_t>
-    , munkres_cpp::matrix_armadillo     <int32_t>
-    , munkres_cpp::matrix_armadillo     <uint32_t>
-    , munkres_cpp::matrix_armadillo     <int64_t>
-    , munkres_cpp::matrix_armadillo     <uint64_t>
-    , munkres_cpp::matrix_armadillo     <float>
-    , munkres_cpp::matrix_armadillo     <double>
+    , TypeHolder <uint8_t,     munkres_cpp::matrix_armadillo>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_armadillo>
+    , TypeHolder <uint16_t,    munkres_cpp::matrix_armadillo>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_armadillo>
+    , TypeHolder <uint32_t,    munkres_cpp::matrix_armadillo>
+    , TypeHolder <int64_t,     munkres_cpp::matrix_armadillo>
+    , TypeHolder <uint64_t,    munkres_cpp::matrix_armadillo>
+    , TypeHolder <float,       munkres_cpp::matrix_armadillo>
+    , TypeHolder <double,      munkres_cpp::matrix_armadillo>
     #endif
     #if BOOST_FOUND == 1
-    , munkres_cpp::matrix_boost         <int8_t>
-    , munkres_cpp::matrix_boost         <uint8_t>
-    , munkres_cpp::matrix_boost         <int16_t>
-    , munkres_cpp::matrix_boost         <uint16_t>
-    , munkres_cpp::matrix_boost         <int32_t>
-    , munkres_cpp::matrix_boost         <uint32_t>
-    , munkres_cpp::matrix_boost         <int64_t>
-    , munkres_cpp::matrix_boost         <uint64_t>
-    , munkres_cpp::matrix_boost         <float>
-    , munkres_cpp::matrix_boost         <double>
-    , munkres_cpp::matrix_boost         <long double>
+    , TypeHolder <int8_t,      munkres_cpp::matrix_boost>
+    , TypeHolder <uint8_t,     munkres_cpp::matrix_boost>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_boost>
+    , TypeHolder <uint16_t,    munkres_cpp::matrix_boost>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_boost>
+    , TypeHolder <uint32_t,    munkres_cpp::matrix_boost>
+    , TypeHolder <int64_t,     munkres_cpp::matrix_boost>
+    , TypeHolder <uint64_t,    munkres_cpp::matrix_boost>
+    , TypeHolder <float,       munkres_cpp::matrix_boost>
+    , TypeHolder <double,      munkres_cpp::matrix_boost>
+    , TypeHolder <long double, munkres_cpp::matrix_boost>
     #endif
     #if EIGEN3_FOUND == 1
-    , munkres_cpp::matrix_eigen         <int8_t>
-    , munkres_cpp::matrix_eigen         <uint8_t>
-    , munkres_cpp::matrix_eigen         <int16_t>
-    , munkres_cpp::matrix_eigen         <uint16_t>
-    , munkres_cpp::matrix_eigen         <int32_t>
-    , munkres_cpp::matrix_eigen         <uint32_t>
-    , munkres_cpp::matrix_eigen         <int64_t>
-    , munkres_cpp::matrix_eigen         <uint64_t>
-    , munkres_cpp::matrix_eigen         <float>
-    , munkres_cpp::matrix_eigen         <double>
-    , munkres_cpp::matrix_eigen         <long double>
+    , TypeHolder <int8_t,      munkres_cpp::matrix_eigen>
+    , TypeHolder <uint8_t,     munkres_cpp::matrix_eigen>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_eigen>
+    , TypeHolder <uint16_t,    munkres_cpp::matrix_eigen>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_eigen>
+    , TypeHolder <uint32_t,    munkres_cpp::matrix_eigen>
+    , TypeHolder <int64_t,     munkres_cpp::matrix_eigen>
+    , TypeHolder <uint64_t,    munkres_cpp::matrix_eigen>
+    , TypeHolder <float,       munkres_cpp::matrix_eigen>
+    , TypeHolder <double,      munkres_cpp::matrix_eigen>
+    , TypeHolder <long double, munkres_cpp::matrix_eigen>
     #endif
     #if OPENCV_FOUND == 1
-    , munkres_cpp::matrix_opencv        <int8_t>
-    , munkres_cpp::matrix_opencv        <uint8_t>
-    , munkres_cpp::matrix_opencv        <int16_t>
-    , munkres_cpp::matrix_opencv        <uint16_t>
-    , munkres_cpp::matrix_opencv        <int32_t>
-    , munkres_cpp::matrix_opencv        <float>
-    , munkres_cpp::matrix_opencv        <double>
+    , TypeHolder <int8_t,      munkres_cpp::matrix_opencv>
+    , TypeHolder <uint8_t,     munkres_cpp::matrix_opencv>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_opencv>
+    , TypeHolder <uint16_t,    munkres_cpp::matrix_opencv>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_opencv>
+    , TypeHolder <float,       munkres_cpp::matrix_opencv>
+    , TypeHolder <double,      munkres_cpp::matrix_opencv>
     #endif
     #if QT5_FOUND == 1
     #if 0
-    , munkres_cpp::matrix_qt            <int8_t,      3, 3>
-    , munkres_cpp::matrix_qt            <uint8_t,     3, 3>
-    , munkres_cpp::matrix_qt            <int16_t,     3, 3>
-    , munkres_cpp::matrix_qt            <uint16_t,    3, 3>
-    , munkres_cpp::matrix_qt            <int32_t,     3, 3>
-    , munkres_cpp::matrix_qt            <uint32_t,    3, 3>
-    , munkres_cpp::matrix_qt            <int64,       3, 3>
-    , munkres_cpp::matrix_qt            <uint64,      3, 3>
-    , munkres_cpp::matrix_qt            <float,       3, 3>
-    , munkres_cpp::matrix_qt            <double,      3, 3>
-    , munkres_cpp::matrix_qt            <long double, 3, 3>
+    , TypeHolder <int8_t,      matrix_qt33>
+    , TypeHolder <uint8_t,     matrix_qt33>
+    , TypeHolder <int16_t,     matrix_qt33>
+    , TypeHolder <uint16_t,    matrix_qt33>
+    , TypeHolder <int32_t,     matrix_qt33>
+    , TypeHolder <uint32_t,    matrix_qt33>
+    , TypeHolder <int64_t,     matrix_qt33>
+    , TypeHolder <uint64_t,    matrix_qt33>
+    , TypeHolder <float,       matrix_qt33>
+    , TypeHolder <double,      matrix_qt33>
+    , TypeHolder <long double, matrix_qt33>
     #endif
     #endif
-    , munkres_cpp::matrix_std_2d_vector <int8_t>
-    , munkres_cpp::matrix_std_2d_vector <uint8_t>
-    , munkres_cpp::matrix_std_2d_vector <int16_t>
-    , munkres_cpp::matrix_std_2d_vector <uint16_t>
-    , munkres_cpp::matrix_std_2d_vector <int32_t>
-    , munkres_cpp::matrix_std_2d_vector <uint32_t>
-    , munkres_cpp::matrix_std_2d_vector <int64_t>
-    , munkres_cpp::matrix_std_2d_vector <uint64_t>
-    , munkres_cpp::matrix_std_2d_vector <float>
-    , munkres_cpp::matrix_std_2d_vector <double>
-    , munkres_cpp::matrix_std_2d_vector <long double>
+    , TypeHolder <int8_t,      munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <uint8_t,     munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <uint16_t,    munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <uint32_t,    munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <int64_t,     munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <uint64_t,    munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <float,       munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <double,      munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <long double, munkres_cpp::matrix_std_2d_vector>
     > MunkresTestTypes;
 TYPED_TEST_SUITE (MunkresTest, MunkresTestTypes);
 
@@ -138,52 +150,63 @@ TYPED_TEST_SUITE (MunkresTest, MunkresTestTypes);
 
 template <typename T> class MunkresSignedTest : public ::testing::Test {};
 typedef ::testing::Types <
-      munkres_cpp::Matrix               <int8_t>
-    , munkres_cpp::Matrix               <int16_t>
-    , munkres_cpp::Matrix               <int32_t>
-    , munkres_cpp::Matrix               <int64_t>
-    , munkres_cpp::Matrix               <float>
-    , munkres_cpp::Matrix               <double>
-    , munkres_cpp::Matrix               <long double>
+      TypeHolder <int8_t,      munkres_cpp::Matrix>
+    , TypeHolder <int16_t,     munkres_cpp::Matrix>
+    , TypeHolder <int32_t,     munkres_cpp::Matrix>
+    , TypeHolder <int64_t,     munkres_cpp::Matrix>
+    , TypeHolder <float,       munkres_cpp::Matrix>
+    , TypeHolder <double,      munkres_cpp::Matrix>
+    , TypeHolder <long double, munkres_cpp::Matrix>
     #if ARMADILLO_FOUND == 1
-    , munkres_cpp::matrix_armadillo     <int16_t>
-    , munkres_cpp::matrix_armadillo     <int32_t>
-    , munkres_cpp::matrix_armadillo     <int64_t>
-    , munkres_cpp::matrix_armadillo     <float>
-    , munkres_cpp::matrix_armadillo     <double>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_armadillo>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_armadillo>
+    , TypeHolder <int64_t,     munkres_cpp::matrix_armadillo>
+    , TypeHolder <float,       munkres_cpp::matrix_armadillo>
+    , TypeHolder <double,      munkres_cpp::matrix_armadillo>
     #endif
     #if BOOST_FOUND == 1
-    , munkres_cpp::matrix_boost         <int8_t>
-    , munkres_cpp::matrix_boost         <int16_t>
-    , munkres_cpp::matrix_boost         <int32_t>
-    , munkres_cpp::matrix_boost         <int64_t>
-    , munkres_cpp::matrix_boost         <float>
-    , munkres_cpp::matrix_boost         <double>
-    , munkres_cpp::matrix_boost         <long double>
+    , TypeHolder <int8_t,      munkres_cpp::matrix_boost>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_boost>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_boost>
+    , TypeHolder <int64_t,     munkres_cpp::matrix_boost>
+    , TypeHolder <float,       munkres_cpp::matrix_boost>
+    , TypeHolder <double,      munkres_cpp::matrix_boost>
+    , TypeHolder <long double, munkres_cpp::matrix_boost>
     #endif
     #if EIGEN3_FOUND == 1
-    , munkres_cpp::matrix_eigen         <int8_t>
-    , munkres_cpp::matrix_eigen         <int16_t>
-    , munkres_cpp::matrix_eigen         <int32_t>
-    , munkres_cpp::matrix_eigen         <int64_t>
-    , munkres_cpp::matrix_eigen         <float>
-    , munkres_cpp::matrix_eigen         <double>
-    , munkres_cpp::matrix_eigen         <long double>
+    , TypeHolder <int8_t,      munkres_cpp::matrix_eigen>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_eigen>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_eigen>
+    , TypeHolder <int64_t,     munkres_cpp::matrix_eigen>
+    , TypeHolder <float,       munkres_cpp::matrix_eigen>
+    , TypeHolder <double,      munkres_cpp::matrix_eigen>
+    , TypeHolder <long double, munkres_cpp::matrix_eigen>
     #endif
     #if OPENCV_FOUND == 1
-    , munkres_cpp::matrix_opencv        <int8_t>
-    , munkres_cpp::matrix_opencv        <int16_t>
-    , munkres_cpp::matrix_opencv        <int32_t>
-    , munkres_cpp::matrix_opencv        <float>
-    , munkres_cpp::matrix_opencv        <double>
+    , TypeHolder <int8_t,      munkres_cpp::matrix_opencv>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_opencv>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_opencv>
+    , TypeHolder <float,       munkres_cpp::matrix_opencv>
+    , TypeHolder <double,      munkres_cpp::matrix_opencv>
     #endif
-    , munkres_cpp::matrix_std_2d_vector <int8_t>
-    , munkres_cpp::matrix_std_2d_vector <int16_t>
-    , munkres_cpp::matrix_std_2d_vector <int32_t>
-    , munkres_cpp::matrix_std_2d_vector <int64_t>
-    , munkres_cpp::matrix_std_2d_vector <float>
-    , munkres_cpp::matrix_std_2d_vector <double>
-    , munkres_cpp::matrix_std_2d_vector <long double>
+    #if QT5_FOUND == 1
+    #if 0
+    , TypeHolder <int8_t,      matrix_qt33>
+    , TypeHolder <int16_t,     matrix_qt33>
+    , TypeHolder <int32_t,     matrix_qt33>
+    , TypeHolder <int64_t,     matrix_qt33>
+    , TypeHolder <float,       matrix_qt33>
+    , TypeHolder <double,      matrix_qt33>
+    , TypeHolder <long double, matrix_qt33>
+    #endif
+    #endif
+    , TypeHolder <int8_t,      munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <int16_t,     munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <int32_t,     munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <int64_t,     munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <float,       munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <double,      munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <long double, munkres_cpp::matrix_std_2d_vector>
     > MunkresSignedTestTypes;
 TYPED_TEST_SUITE (MunkresSignedTest, MunkresSignedTestTypes);
 
@@ -191,30 +214,37 @@ TYPED_TEST_SUITE (MunkresSignedTest, MunkresSignedTestTypes);
 
 template <typename T> class MunkresFloatingTest : public ::testing::Test {};
 typedef ::testing::Types <
-      munkres_cpp::Matrix               <float>
-    , munkres_cpp::Matrix               <double>
-    , munkres_cpp::Matrix               <long double>
+      TypeHolder <float,       munkres_cpp::Matrix>
+    , TypeHolder <double,      munkres_cpp::Matrix>
+    , TypeHolder <long double, munkres_cpp::Matrix>
     #if ARMADILLO_FOUND == 1
-    , munkres_cpp::matrix_armadillo     <float>
-    , munkres_cpp::matrix_armadillo     <double>
+    , TypeHolder <float,       munkres_cpp::matrix_armadillo>
+    , TypeHolder <double,      munkres_cpp::matrix_armadillo>
     #endif
     #if BOOST_FOUND == 1
-    , munkres_cpp::matrix_boost         <float>
-    , munkres_cpp::matrix_boost         <double>
-    , munkres_cpp::matrix_boost         <long double>
+    , TypeHolder <float,       munkres_cpp::matrix_boost>
+    , TypeHolder <double,      munkres_cpp::matrix_boost>
+    , TypeHolder <long double, munkres_cpp::matrix_boost>
     #endif
     #if EIGEN3_FOUND == 1
-    , munkres_cpp::matrix_eigen         <float>
-    , munkres_cpp::matrix_eigen         <double>
-    , munkres_cpp::matrix_eigen         <long double>
+    , TypeHolder <float,       munkres_cpp::matrix_eigen>
+    , TypeHolder <double,      munkres_cpp::matrix_eigen>
+    , TypeHolder <long double, munkres_cpp::matrix_eigen>
     #endif
     #if OPENCV_FOUND == 1
-    , munkres_cpp::matrix_opencv        <float>
-    , munkres_cpp::matrix_opencv        <double>
+    , TypeHolder <float,       munkres_cpp::matrix_opencv>
+    , TypeHolder <double,      munkres_cpp::matrix_opencv>
     #endif
-    , munkres_cpp::matrix_std_2d_vector <float>
-    , munkres_cpp::matrix_std_2d_vector <double>
-    , munkres_cpp::matrix_std_2d_vector <long double>
+    #if QT5_FOUND == 1
+    #if 0
+    , TypeHolder <float,       matrix_qt33>
+    , TypeHolder <double,      matrix_qt33>
+    , TypeHolder <long double, matrix_qt33>
+    #endif
+    #endif
+    , TypeHolder <float,       munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <double,      munkres_cpp::matrix_std_2d_vector>
+    , TypeHolder <long double, munkres_cpp::matrix_std_2d_vector>
     > MunkresFloatingTestTypes;
 TYPED_TEST_SUITE (MunkresFloatingTest, MunkresFloatingTestTypes);
 

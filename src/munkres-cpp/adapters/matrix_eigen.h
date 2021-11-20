@@ -32,6 +32,7 @@ class matrix_eigen : public matrix_base<T>, public Eigen::Matrix<T, Eigen::Dynam
         matrix_eigen (size_t rows, size_t columns)
             : Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>::Matrix (rows, columns)
         {
+            std::fill (matrix_base<T>::begin (), matrix_base<T>::end (), T (0) );
         }
 
         matrix_eigen (const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> & other)

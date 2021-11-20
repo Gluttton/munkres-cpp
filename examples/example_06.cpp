@@ -26,18 +26,19 @@
 #include <ctime>
 
 #include <munkres-cpp/munkres.h>
+#include <munkres-cpp/adapters/matrix_boost.h>
 
 int main (int argc, char * argv[])
 {
-    int nrows = 101;
-    int ncols = 101;
+    int nrows = 10;
+    int ncols = 10;
 
     if (argc == 3) {
         nrows = atoi (argv[1]);
         ncols = atoi (argv[2]);
     }
 
-    munkres_cpp::Matrix<double> matrix (nrows, ncols);
+    munkres_cpp::matrix_boost<double> matrix (nrows, ncols);
 
     srandom ( time (nullptr) ); // Seed random number generator.
 
@@ -59,7 +60,7 @@ int main (int argc, char * argv[])
     std::cout << std::endl;
 
     // Apply Munkres algorithm to matrix.
-    munkres_cpp::Munkres<double> m (matrix);
+    munkres_cpp::Munkres<double, munkres_cpp::matrix_boost> m (matrix);
 
     // Display solved matrix.
     for (int row = 0; row < nrows; row++) {

@@ -40,7 +40,7 @@ class matrix_boost_adapter : public munkres_cpp::matrix_base<T>, boost::numeric:
 {
     public:
         matrix_boost_adapter (const size_t rows, const size_t columns)
-            : boost::numeric::ublas::matrix<T>::matrix (rows, columns)
+            : boost::numeric::ublas::matrix<T>::matrix (rows, columns, 0)
         {
         }
 
@@ -114,7 +114,7 @@ int main (int /*argc*/, char * /*argv*/[])
     // of the input data you should use it.
     if (munkres_cpp::is_data_valid (data) ) {
         // Next you need create the problem solver and pass data to it.
-        munkres_cpp::Munkres<float> solver (data);
+        munkres_cpp::Munkres<float, matrix_boost_adapter> solver (data);
 
         // Now the matrix contains the solution.
         // Zero value represents selected values.
