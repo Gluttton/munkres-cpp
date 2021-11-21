@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2007 John Weaver
+ *   Copyright (c) 2016 Gluttton <gluttton@ukr.net>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,25 +18,26 @@
 
 
 
-// The easiest way to start with munkres-cpp.
+// Trivial example with obvious solution.
+
+// Include header with the solver class.
 #include <munkres-cpp/munkres.h>
+// Include header with the built-in matrix class.
 #include <munkres-cpp/matrix.h>
 #include <cstdlib>
 
-int main (int /*argc*/, char * /*argv*/[])
+int main (int, char **)
 {
-    // Set input data (cost matrix) into matrix of generic type
-    // munkres_cpp::Matrix, which is provided by the library.
-    munkres_cpp::Matrix<int> data {
+    // Create an instance of matrix container and fill it with
+    // input (cost) data.
+    munkres_cpp::Matrix<unsigned> data {
     // Task I  Task II
         {1,       3}    // Worker I
        ,{5,       9}    // Worker II
     };
-    // You are totally responsible for correctness of the input data.
-    // Input data must be positive and well defined (no NaN or infinity).
 
-    // Next you need create the problem solver and pass data to it.
-    munkres_cpp::Munkres<int, munkres_cpp::Matrix> solver (data);
+    // Next, create a problem solver and pass data to it.
+    munkres_cpp::Munkres<unsigned, munkres_cpp::Matrix> solver (data);
 
     // Now the matrix contains the solution of the problem.
     // Zero value represents selected values.
@@ -44,7 +45,7 @@ int main (int /*argc*/, char * /*argv*/[])
     // Task I  Task II
     //   1,       0     // Worker I
     //   0,       1     // Worker II
-    // Which means that sum of the costs 3 and 5 is equal 8 and
+    // That means that sum of the costs 3 and 5 is equal 8 and
     // is minimum cost among the matrix.
 
     return EXIT_SUCCESS;

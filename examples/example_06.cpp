@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2007 John Weaver
+ *   Copyright (c) 2021 Gluttton <gluttton@ukr.net>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -16,83 +16,60 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-/*
- * Some example code.
- *
- */
 
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
+// How to integrate the library in the existing pipeline using adapter class.
+// Example for OpenCV.
 
+// Include header with the solver class.
 #include <munkres-cpp/munkres.h>
-#include <munkres-cpp/adapters/matrix_boost.h>
 
-int main (int argc, char * argv[])
+// The library provides set of adapters for the most popular containers
+// (for more info explore "adapters" folder).
+// If you are lucky then adapter for your container is already implemented.
+
+// Include header with the adapter for OpenCV matrix class.
+#include <munkres-cpp/adapters/matrix_opencv.h>
+#include <cstdlib>
+#include <iostream>
+
+// Let's suppose that a pipeline that modifies data stored in
+// the OpenCV matrix container is already implemented.  And it is
+// necessary to add one more processing step between existing ones.
+//
+//  Generate  >----->  Consume
+//               ^
+//               |
+//             Solve
+
+
+cv::Mat_<double> Generate ()
 {
-    int nrows = 10;
-    int ncols = 10;
-
-    if (argc == 3) {
-        nrows = atoi (argv[1]);
-        ncols = atoi (argv[2]);
-    }
-
-    munkres_cpp::matrix_boost<double> matrix (nrows, ncols);
-
-    srandom ( time (nullptr) ); // Seed random number generator.
-
-    // Initialize matrix with random values.
-    for (int row = 0; row < nrows; row++) {
-        for (int col = 0; col < ncols; col++) {
-            matrix (row,col) = (double)random ();
-        }
-    }
-
-    // Display begin matrix state.
-    for (int row = 0; row < nrows; row++) {
-        for (int col = 0; col < ncols; col++) {
-            std::cout.width (2);
-            std::cout << matrix (row,col) << ",";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-
-    // Apply Munkres algorithm to matrix.
-    munkres_cpp::Munkres<double, munkres_cpp::matrix_boost> m (matrix);
-
-    // Display solved matrix.
-    for (int row = 0; row < nrows; row++) {
-        for (int col = 0; col < ncols; col++) {
-            std::cout.width (2);
-            std::cout << matrix (row,col) << ",";
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << std::endl;
+    cv::Mat_<double> data (2, 2);
+    data (0, 0) = 1.0; data (0, 1) = 3.0;
+    data (1, 0) = 5.0; data (1, 1) = 9.0;
+    return data;
+}
 
 
-    for (int row = 0; row < nrows; row++) {
-        int rowcount = 0;
-        for (int col = 0; col < ncols; col++) {
-            if (matrix (row,col) == 0)
-                rowcount++;
-        }
-        if (rowcount != 1)
-            std::cerr << "Row " << row << " has " << rowcount << " columns that have been matched." << std::endl;
-    }
+void Consume (cv::Mat_<double> & data)
+{
+    std::cout << data (0, 0) << " " << data (0, 1) << std::endl;
+    std::cout << data (1, 0) << " " << data (1, 1) << std::endl;
+}
 
-    for (int col = 0; col < ncols; col++) {
-        int colcount = 0;
-        for (int row = 0; row < nrows; row++) {
-            if (matrix (row,col) == 0)
-                colcount++;
-        }
-        if (colcount != 1)
-            std::cerr << "Column " << col << " has " << colcount << " rows that have been matched." << std::endl;
-    }
 
-    return 0;
+int main (int /*argc*/, char * /*argv*/[])
+{
+    // Call the previous processing step that generates a variable
+    // of type cv::Mat_ and pass the variable to adapter's constructor.
+    munkres_cpp::matrix_opencv<double> data (Generate () );
+
+    // Create the solver and pass the adapter instance to it.
+    munkres_cpp::Munkres<double, munkres_cpp::matrix_opencv> solver (data);
+
+    // Call the further processing step and pass the adapter variable to it.
+    // Since the adapter class inherits the cv::Mat_ they are interchangeable.
+    Consume (data);
+
+    return EXIT_SUCCESS;
 }

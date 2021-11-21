@@ -1,5 +1,6 @@
 /*
  *   Copyright (c) 2007 John Weaver
+ *   Copyright (c) 2016 Gluttton <gluttton@ukr.net>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

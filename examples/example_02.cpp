@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2007 John Weaver
+ *   Copyright (c) 2021 Gluttton <gluttton@ukr.net>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,40 +18,37 @@
 
 
 
-// Easy way to start with munkres-cpp.
+// Trivial example with less obvious solution.
+
+// Include header with the solver class.
 #include <munkres-cpp/munkres.h>
+// Include header with the built-in matrix class.
 #include <munkres-cpp/matrix.h>
-#include <munkres-cpp/utils.h>
 #include <cstdlib>
 
-int main (int /*argc*/, char * /*argv*/[])
+int main (int, char **)
 {
-    // Set input data (cost matrix) into matrix of generic type
-    // munkres_cpp::Matrix, which is provided by the library.
-    munkres_cpp::Matrix<int> data {
-        {1,   3}
-       ,{5,   9}
+    // Create an instance of matrix container and fill it with
+    // input (cost) data.
+    munkres_cpp::Matrix<unsigned> data {
+    // Task I  Task II Task III
+        {1,       3,      4}    // Worker I
+       ,{5,       9,      6}    // Worker II
+       ,{5,       8,      2}    // Worker III
     };
-    // You are totally responsible for correctness of the input data.
-    // Input data must be positive and well defined (no NaN or infinity).
 
-    // The library provide generic function for checking is input data
-    // correct and ready for processing. If you not sure in correctness
-    // of the input data you should use it.
-    if (munkres_cpp::is_data_valid (data) ) {
-        // Next you need to create the problem solver and pass data to it.
-        munkres_cpp::Munkres<int, munkres_cpp::Matrix> solver (data);
+    // Next, create a problem solver and pass data to it.
+    munkres_cpp::Munkres<unsigned, munkres_cpp::Matrix> solver (data);
 
-        // Now the matrix contains the solution.
-        // Zero value represents selected values.
-        // For input above data the result will be:
-        //   1,   0
-        //   0,   1
+    // Now the matrix contains the solution of the problem.
+    // Zero value represents selected values.
+    // For input above data the result will be:
+    // Task I  Task II  Task III
+    //   1,       0,       1    // Worker I
+    //   0,       1,       1    // Worker II
+    //   1,       1,       0    // Worker III
+    // That means that sum of the costs 3, 5 and 2 is equal 10 and
+    // is minimum cost among the matrix.
 
-        return EXIT_SUCCESS;
-    }
-    else {
-        return EXIT_FAILURE;
-    }
+    return EXIT_SUCCESS;
 }
-

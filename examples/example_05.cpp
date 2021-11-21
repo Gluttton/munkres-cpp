@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2007 John Weaver
+ *   Copyright (c) 2021 Gluttton <gluttton@ukr.net>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -17,119 +17,61 @@
  */
 
 
+// How to integrate the library in the existing pipeline using adapter class.
+// Example for Boost.
 
-// The most complex example of usage the library.
+// Include header with the solver class.
 #include <munkres-cpp/munkres.h>
-// The library provides set of adapters for the most popular containers.
-// But if you need you can create adapter for any type of container by deriving
-// from base matrix class and implement the basic functions which allows navigate
-// on container and access to its data.
-#include <munkres-cpp/matrix_base.h>
-#include <boost/numeric/ublas/matrix.hpp>
-// Additional utils for processing floating point data.
-#include <munkres-cpp/utils.h>
+
+// The library provides set of adapters for the most popular containers
+// (for more info explore "adapters" folder).
+// If you are lucky then adapter for your container is already implemented.
+
+// Include header with the adapter for Boost matrix class.
+#include <munkres-cpp/adapters/matrix_boost.h>
 #include <cstdlib>
+#include <iostream>
 
-// In general there are several approaches how to implement adapters:
-// - use inheritance (inherited from both your container and
-//   munkres_cpp::matrix_base);
-// - use composition (inherited from munkres_cpp::matrix_base and use your
-//   container as member);
-template<class T>
-class matrix_boost_adapter : public munkres_cpp::matrix_base<T>, boost::numeric::ublas::matrix<T>
+// Let's suppose that a pipeline that modifies data stored in
+// the Boost matrix container is already implemented.  And it is
+// necessary to add one more processing step between existing ones.
+//
+//  Generate  >----->  Consume
+//               ^
+//               |
+//             Solve
+
+
+boost::numeric::ublas::matrix<double> Generate ()
 {
-    public:
-        matrix_boost_adapter (const size_t rows, const size_t columns)
-            : boost::numeric::ublas::matrix<T>::matrix (rows, columns, 0)
-        {
-        }
+    boost::numeric::ublas::matrix<double> data (2, 2);
+    data (0, 0) = 1.0; data (0, 1) = 3.0;
+    data (1, 0) = 5.0; data (1, 1) = 9.0;
+    return data;
+}
 
-        const T & operator () (const size_t row, const size_t column) const override
-        {
-            return boost::numeric::ublas::matrix<T>::operator () (row, column);
-        };
 
-        T & operator () (const size_t row, const size_t column) override
-        {
-            return boost::numeric::ublas::matrix<T>::operator () (row, column);
-        }
+void Consume (boost::numeric::ublas::matrix<double> & data)
+{
+    std::cout << data (0, 0) << " " << data (0, 1) << std::endl;
+    std::cout << data (1, 0) << " " << data (1, 1) << std::endl;
+}
 
-        size_t columns () const override
-        {
-            return boost::numeric::ublas::matrix<T>::size2 ();
-        }
-
-        size_t rows () const override
-        {
-            return boost::numeric::ublas::matrix<T>::size1 ();
-        }
-
-        // If you plan to use the solver with non-square matrices you need reimplement resize
-        // function which by default implementation in base class just throw exception.
-        void resize (const size_t rows, const size_t columns, const T value = munkres_cpp::matrix_base<T>::zero) override
-        {
-            if (rows != this->rows () || columns != this->columns () ) {
-                const auto rows_old = this->rows ();
-                const auto columns_old = this->columns ();
-                boost::numeric::ublas::matrix<T>::resize (rows, columns, true);
-                if (rows_old < rows) {
-                    for (size_t i = rows_old; i < rows; ++i) {
-                        for (size_t j = 0; j < columns; ++j) {
-                            this->operator() (i, j) = value;
-                        }
-                    }
-                }
-                if (columns_old < columns) {
-                    for (size_t i = columns_old; i < columns; ++i) {
-                        for (size_t j = 0; j < rows; ++j) {
-                            this->operator() (j, i) = value;
-                        }
-                    }
-                }
-
-            }
-        }
-};
 
 int main (int /*argc*/, char * /*argv*/[])
 {
-    // Set input data (cost matrix) into your adapter.
-    matrix_boost_adapter<float> data (3, 2);
-    // The library can manage with non-square matrices.
-    // In such case the library resize the input matrix and fill
-    // new cells by sensible data.
-    //           Task I           Task II
-    data (0, 0) = 1; data (0, 1) = 2;   // Worker I
-    data (1, 0) = 0; data (1, 1) = 9;   // Worker II
-    data (2, 0) = 9; data (2, 1) = 9;   // Worker III
-    // You are totally responsible for correctness of the input data.
-    // Input data must be positive and well defined (no NaN or infinity).
+    // Call the previous processing step that generates a variable
+    // of type boost::numeric::ublas::matrix and pass the variable
+    // to adapter's constructor.
+    munkres_cpp::matrix_boost<double> data (Generate () );
 
-    // If this corresponds logic of your problem domain you can replace
-    // positive infinities on maximum value.
-    munkres_cpp::replace_infinites (data);
+    // Create the solver and pass the adapter instance to it.
+    munkres_cpp::Munkres<double, munkres_cpp::matrix_boost> solver (data);
 
-    // The library provide generic function for checking is input data
-    // correct and ready for processing. If you not sure in correctness
-    // of the input data you should use it.
-    if (munkres_cpp::is_data_valid (data) ) {
-        // Next you need create the problem solver and pass data to it.
-        munkres_cpp::Munkres<float, matrix_boost_adapter> solver (data);
+    // Call the further processing step and pass the adapter variable to it.
+    // Since the adapter class inherits the boost::numeric::ublas::matrix
+    // they are interchangeable.
+    Consume (data);
 
-        // Now the matrix contains the solution.
-        // Zero value represents selected values.
-        // For input above data the result will be:
-        // Task I  Task II
-        //   1,       0     // Worker I
-        //   0,       1     // Worker II
-        //   1,       1     // Worker III
-        // Which means that sum of the costs 0 and 2 is equal 2 and
-        // is minimum cost among the matrix.
-
-        return EXIT_SUCCESS;
-    }
-    else {
-        return EXIT_FAILURE;
-    }
+    return EXIT_SUCCESS;
 }
-
