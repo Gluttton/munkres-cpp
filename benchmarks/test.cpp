@@ -1,8 +1,8 @@
-#include <hayai.hpp>
+#include <celero/Celero.h>
 #include <vector>
 
 #include "munkres-cpp/munkres.h"
-#include "../../tests/matrix_test_utils.h"
+#include "../tests/matrix_test_utils.h"
 
 
 
@@ -12,7 +12,7 @@ size_t i {0};
 
 
 
-class MunkresFixture : public ::hayai::Fixture
+class MunkresFixture : public celero::TestFixture
 {
     public:
         MunkresFixture ()
@@ -20,7 +20,7 @@ class MunkresFixture : public ::hayai::Fixture
         {
         }
 
-        void SetUp () override
+        void setUp (const celero::TestFixture::ExperimentValue &) override
         {
             matrix = * matrices [i];
         }
@@ -30,21 +30,19 @@ class MunkresFixture : public ::hayai::Fixture
 
 
 
-BENCHMARK_F (MunkresFixture, Solve, 5000, 1)
+BASELINE_F (Munkres, Solve, MunkresFixture, 5000, 1)
 {
     munkres_cpp::Munkres<MUNKRES_CPP_VALUE_TYPE> munkres (matrix);
 }
 
 
 
-int main (int, char **)
+int main (int argc, char * argv [])
 {
     read (matrices);
 
-    hayai::ConsoleOutputter consoleOutputter;
-    hayai::Benchmarker::AddOutputter (consoleOutputter);
     while (i < matrices.size () ) {
-        hayai::Benchmarker::RunAllTests ();
+        celero::Run (argc, argv);
         ++i;
     }
 }

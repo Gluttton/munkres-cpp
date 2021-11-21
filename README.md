@@ -100,7 +100,7 @@ Requirements:
  - [GNU Make](https://www.gnu.org/software/make/);  
  - [CMake](http://www.cmake.org/) (2.8.12);  
  - the test suite requires the [Google C++ Test Framework](http://code.google.com/p/googletest/);  
- - microbenchmaring requires [Benchmark](https://github.com/google/benchmark), [Celero](https://github.com/DigitalInBlue/Celero), [Hayai](https://github.com/nickbruun/hayai) and [gprof](http://www.gnu.org/software/binutils/);  
+ - microbenchmaring requires [Celero](https://github.com/DigitalInBlue/Celero);  
  - code coverage requires [gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and lcov.  
 
 
@@ -149,23 +149,12 @@ $ make benchmarks
 ```
 To get comparable results it's required to generate data set wich will be used for all benchmarks:
 ```
-$ benchmarks/tools/generator/matrixgenerator.bin {dim_1 dim_2 ... dim_n}
+$ benchmarks/generator {dim_1 dim_2 ... dim_n}
 ```
 Where every ```dim_x``` parameter generate square matrix dith ```dim_x``` dimension.
 To launch microbenchmark performs any following command:
 ```
-$ benchmarks/tests/munkresbenchmark_celero.bin
-$ benchmarks/tests/munkresbenchmark_google.bin
-$ benchmarks/tests/munkresbenchmark_hayai.bin
-$ benchmarks/tests/munkresbenchmark_rdtsc.bin
-```
-
-
-Lunch performance analyze.
-```
-$ <build microbenchmarks and generate data set>
-$ benchmarks/tests/munkresbenchmark_gprof.bin
-$ gprof benchmarks/tests/munkresbenchmark_gprof.bin gmon.out -p -b
+$ benchmarks/tests/munkresbenchmark
 ```
 
 

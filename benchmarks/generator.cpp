@@ -1,5 +1,5 @@
 #include <cstdlib>
-#include "../../../tests/matrix_test_utils.h"
+#include "../tests/matrix_test_utils.h"
 
 int main (int argc, char * argv [])
 {
