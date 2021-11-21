@@ -4,8 +4,7 @@
 
 
 
-template<typename TypeParam>
-void replace_infinities_4x4Case001_Success ()
+TYPED_TEST (MunkresFloatingTest, replace_infinities_4x4Case001_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -49,15 +48,9 @@ void replace_infinities_4x4Case001_Success ()
     }
 }
 
-TYPED_TEST (MunkresTestFloating, replace_infinities_4x4Case001_Success)
-{
-    replace_infinities_4x4Case001_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void replace_infinities_4x4Case002_Success ()
+TYPED_TEST (MunkresFloatingTest, replace_infinities_4x4Case002_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -107,15 +100,9 @@ void replace_infinities_4x4Case002_Success ()
     }
 }
 
-TYPED_TEST (MunkresTestFloating, replace_infinities_4x4Case002_Success)
-{
-    replace_infinities_4x4Case002_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void replace_infinities_4x4Case003_Success ()
+TYPED_TEST (MunkresFloatingTest, replace_infinities_4x4Case003_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -159,15 +146,9 @@ void replace_infinities_4x4Case003_Success ()
     }
 }
 
-TYPED_TEST (MunkresTestFloating, replace_infinities_4x4Case003_Success)
-{
-    replace_infinities_4x4Case003_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void replace_infinities_4x4Case004_Success ()
+TYPED_TEST (MunkresFloatingTest, replace_infinities_4x4Case004_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -211,15 +192,9 @@ void replace_infinities_4x4Case004_Success ()
     }
 }
 
-TYPED_TEST (MunkresTestFloating, replace_infinities_4x4Case004_Success)
-{
-    replace_infinities_4x4Case004_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void replace_infinities_4x4Case005_Success ()
+TYPED_TEST (MunkresFloatingTest, replace_infinities_4x4Case005_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -256,15 +231,9 @@ void replace_infinities_4x4Case005_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestFloating, replace_infinities_4x4Case005_Success)
-{
-    replace_infinities_4x4Case005_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void replace_infinities_4x4Case006_Success ()
+TYPED_TEST (MunkresFloatingTest, replace_infinities_4x4Case006_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -292,15 +261,9 @@ void replace_infinities_4x4Case006_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestFloating, replace_infinities_4x4Case006_Success)
-{
-    replace_infinities_4x4Case006_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void replace_infinities_4x4Case007_Success ()
+TYPED_TEST (MunkresFloatingTest, replace_infinities_4x4Case007_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -329,15 +292,9 @@ void replace_infinities_4x4Case007_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestFloating, replace_infinities_4x4Case007_Success)
-{
-    replace_infinities_4x4Case007_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void is_data_valid_Success ()
+TYPED_TEST (MunkresTest, is_data_valid_Success)
 {
     // Arrange.
     TypeParam m (2, 2);
@@ -348,40 +305,9 @@ void is_data_valid_Success ()
     EXPECT_TRUE (munkres_cpp::is_data_valid (m) );
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, is_data_valid_Success)
-{
-    is_data_valid_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, is_data_valid_Success)
-{
-    is_data_valid_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, is_data_valid_Success)
-{
-    is_data_valid_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, is_data_valid_Success)
-{
-    is_data_valid_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, is_data_valid_Success)
-{
-    is_data_valid_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, is_data_valid_Success)
-{
-    is_data_valid_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void is_data_valid_negative_Failed ()
+TYPED_TEST (MunkresSignedTest, is_data_valid_negative_Failed)
 {
     // Arrange.
     TypeParam m (2, 2);
@@ -392,15 +318,9 @@ void is_data_valid_negative_Failed ()
     EXPECT_FALSE (munkres_cpp::is_data_valid (m) );
 }
 
-TYPED_TEST (MunkresTestSigned, is_data_valid_negative_Failed)
-{
-    is_data_valid_negative_Failed<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void is_data_valid_infinity_Failed ()
+TYPED_TEST (MunkresFloatingTest, is_data_valid_infinity_Failed)
 {
     // Arrange.
     TypeParam m (2, 2);
@@ -411,15 +331,9 @@ void is_data_valid_infinity_Failed ()
     EXPECT_FALSE (munkres_cpp::is_data_valid (m) );
 }
 
-TYPED_TEST (MunkresTestFloating, is_data_valid_infinity_Failed)
-{
-    is_data_valid_infinity_Failed<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void is_data_valid_minus_infinity_Failed ()
+TYPED_TEST (MunkresFloatingTest, is_data_valid_minus_infinity_Failed)
 {
     // Arrange.
     TypeParam m (2, 2);
@@ -430,15 +344,9 @@ void is_data_valid_minus_infinity_Failed ()
     EXPECT_FALSE (munkres_cpp::is_data_valid (m) );
 }
 
-TYPED_TEST (MunkresTestFloating, is_data_valid_minus_infinity_Failed)
-{
-    is_data_valid_minus_infinity_Failed<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void is_data_valid_NaN_Failed ()
+TYPED_TEST (MunkresFloatingTest, is_data_valid_NaN_Failed)
 {
     // Arrange.
     TypeParam m (2, 2);
@@ -449,15 +357,9 @@ void is_data_valid_NaN_Failed ()
     EXPECT_FALSE (munkres_cpp::is_data_valid (m) );
 }
 
-TYPED_TEST (MunkresTestFloating, is_data_valid_NaN_Failed)
-{
-    is_data_valid_NaN_Failed<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void is_data_valid_denormalized_Failed ()
+TYPED_TEST (MunkresFloatingTest, is_data_valid_denormalized_Failed)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -467,9 +369,4 @@ void is_data_valid_denormalized_Failed ()
 
     // Act, Assert.
     EXPECT_FALSE (munkres_cpp::is_data_valid (m) );
-}
-
-TYPED_TEST (MunkresTestFloating, is_data_valid_denormalized_Failed)
-{
-    is_data_valid_denormalized_Failed<TypeParam> ();
 }

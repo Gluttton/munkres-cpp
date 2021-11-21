@@ -5,8 +5,7 @@
 
 
 
-template<typename TypeParam>
-void minimize_along_direction_5x5_OverRowsOnly_Success ()
+TYPED_TEST (MunkresTest, minimize_along_direction_5x5_OverRowsOnly_Success)
 {
     // Arrange.
     TypeParam e (5, 5);
@@ -30,40 +29,9 @@ void minimize_along_direction_5x5_OverRowsOnly_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, minimize_along_direction_5x5_OverRowsOnly_Success)
-{
-    minimize_along_direction_5x5_OverRowsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, minimize_along_direction_5x5_OverRowsOnly_Success)
-{
-    minimize_along_direction_5x5_OverRowsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, minimize_along_direction_5x5_OverRowsOnly_Success)
-{
-    minimize_along_direction_5x5_OverRowsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, minimize_along_direction_5x5_OverRowsOnly_Success)
-{
-    minimize_along_direction_5x5_OverRowsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, minimize_along_direction_5x5_OverRowsOnly_Success)
-{
-    minimize_along_direction_5x5_OverRowsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, minimize_along_direction_5x5_OverRowsOnly_Success)
-{
-    minimize_along_direction_5x5_OverRowsOnly_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void minimize_along_direction_5x5_OverColumnsOnly_Success ()
+TYPED_TEST (MunkresTest, minimize_along_direction_5x5_OverColumnsOnly_Success)
 {
     // Arrange.
     TypeParam e (5, 5);
@@ -87,40 +55,9 @@ void minimize_along_direction_5x5_OverColumnsOnly_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, minimize_along_direction_5x5_OverColumnsOnly_Success)
-{
-    minimize_along_direction_5x5_OverColumnsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, minimize_along_direction_5x5_OverColumnsOnly_Success)
-{
-    minimize_along_direction_5x5_OverColumnsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, minimize_along_direction_5x5_OverColumnsOnly_Success)
-{
-    minimize_along_direction_5x5_OverColumnsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, minimize_along_direction_5x5_OverColumnsOnly_Success)
-{
-    minimize_along_direction_5x5_OverColumnsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, minimize_along_direction_5x5_OverColumnsOnly_Success)
-{
-    minimize_along_direction_5x5_OverColumnsOnly_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, minimize_along_direction_5x5_OverColumnsOnly_Success)
-{
-    minimize_along_direction_5x5_OverColumnsOnly_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void minimize_along_direction_5x5_OverRowsAndColumns_Success ()
+TYPED_TEST (MunkresTest, minimize_along_direction_5x5_OverRowsAndColumns_Success)
 {
     // Arrange.
     TypeParam e (5, 5);
@@ -145,37 +82,27 @@ void minimize_along_direction_5x5_OverRowsAndColumns_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, minimize_along_direction_5x5_OverRowsAndColumns_Success)
+
+
+template<typename T>
+void isSingleSolution (T & matrix)
 {
-    minimize_along_direction_5x5_OverRowsAndColumns_Success<TypeParam> ();
+    for (size_t row = 0; row < matrix.rows (); row++) {
+        int columnsolutioncount = 0;
+        for (size_t col = 0; col < matrix.columns (); col++)
+            if (matrix (row,col) == 0)
+                columnsolutioncount++;
+        EXPECT_EQ (columnsolutioncount, 1);
+    }
+
+    for (size_t col = 0; col < matrix.columns (); col++) {
+        int rowsolutioncount = 0;
+        for (size_t row = 0; row < matrix.rows (); row++)
+            if (matrix (row,col) == 0)
+                rowsolutioncount++;
+        EXPECT_EQ (rowsolutioncount, 1);
+    }
 }
-
-TYPED_TEST (MunkresTestMatrixArmadillo, minimize_along_direction_5x5_OverRowsAndColumns_Success)
-{
-    minimize_along_direction_5x5_OverRowsAndColumns_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, minimize_along_direction_5x5_OverRowsAndColumns_Success)
-{
-    minimize_along_direction_5x5_OverRowsAndColumns_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, minimize_along_direction_5x5_OverRowsAndColumns_Success)
-{
-    minimize_along_direction_5x5_OverRowsAndColumns_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, minimize_along_direction_5x5_OverRowsAndColumns_Success)
-{
-    minimize_along_direction_5x5_OverRowsAndColumns_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, minimize_along_direction_5x5_OverRowsAndColumns_Success)
-{
-    minimize_along_direction_5x5_OverRowsAndColumns_Success<TypeParam> ();
-}
-
-
 
 template<typename TypeParam, size_t N>
 void solve_IsSingleSolution_Success ()
@@ -190,52 +117,7 @@ void solve_IsSingleSolution_Success ()
     isSingleSolution (matrix);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_IsSingleSolution_Success)
-{
-    solve_IsSingleSolution_Success<TypeParam,   5> ();
-    solve_IsSingleSolution_Success<TypeParam,  10> ();
-    solve_IsSingleSolution_Success<TypeParam,  50> ();
-    solve_IsSingleSolution_Success<TypeParam, 100> ();
-    solve_IsSingleSolution_Success<TypeParam, 200> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_IsSingleSolution_Success)
-{
-    solve_IsSingleSolution_Success<TypeParam,   5> ();
-    solve_IsSingleSolution_Success<TypeParam,  10> ();
-    solve_IsSingleSolution_Success<TypeParam,  50> ();
-    solve_IsSingleSolution_Success<TypeParam, 100> ();
-    solve_IsSingleSolution_Success<TypeParam, 200> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_IsSingleSolution_Success)
-{
-    solve_IsSingleSolution_Success<TypeParam,   5> ();
-    solve_IsSingleSolution_Success<TypeParam,  10> ();
-    solve_IsSingleSolution_Success<TypeParam,  50> ();
-    solve_IsSingleSolution_Success<TypeParam, 100> ();
-    solve_IsSingleSolution_Success<TypeParam, 200> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_IsSingleSolution_Success)
-{
-    solve_IsSingleSolution_Success<TypeParam,   5> ();
-    solve_IsSingleSolution_Success<TypeParam,  10> ();
-    solve_IsSingleSolution_Success<TypeParam,  50> ();
-    solve_IsSingleSolution_Success<TypeParam, 100> ();
-    solve_IsSingleSolution_Success<TypeParam, 200> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, solve_IsSingleSolution_Success)
-{
-    solve_IsSingleSolution_Success<TypeParam,   5> ();
-    solve_IsSingleSolution_Success<TypeParam,  10> ();
-    solve_IsSingleSolution_Success<TypeParam,  50> ();
-    solve_IsSingleSolution_Success<TypeParam, 100> ();
-    solve_IsSingleSolution_Success<TypeParam, 200> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_IsSingleSolution_Success)
+TYPED_TEST (MunkresTest, solve_IsSingleSolution_Success)
 {
     solve_IsSingleSolution_Success<TypeParam,   5> ();
     solve_IsSingleSolution_Success<TypeParam,  10> ();
@@ -246,11 +128,18 @@ TYPED_TEST (MunkresTestMatrixStd2dvector, solve_IsSingleSolution_Success)
 
 
 
-template<typename TypeParam, size_t N>
-void solve_IsValidOutput_Success ()
+template<typename T>
+void isValidOutput (T & matrix)
+{
+    for (size_t col = 0; col < matrix.columns (); col++)
+        for (size_t row = 0; row < matrix.rows (); row++)
+            EXPECT_TRUE (matrix (row,col) == 0 || matrix (row,col) == 1);
+}
+
+TYPED_TEST (MunkresTest, solve_IsValidOutput_Success)
 {
     // Arrange.
-    TypeParam matrix = generate_random_matrix<TypeParam> (N, N);
+    TypeParam matrix = generate_random_matrix<TypeParam> (10, 10);
 
     // Act.
     munkres_cpp::Munkres<typename TypeParam::matrix_base::value_type> munkres (matrix);
@@ -259,40 +148,9 @@ void solve_IsValidOutput_Success ()
     isValidOutput (matrix);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_IsValidOutput_Success)
-{
-    solve_IsValidOutput_Success<TypeParam,  10> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_IsValidOutput_Success)
-{
-    solve_IsValidOutput_Success<TypeParam,  10> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_IsValidOutput_Success)
-{
-    solve_IsValidOutput_Success<TypeParam,  10> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_IsValidOutput_Success)
-{
-    solve_IsValidOutput_Success<TypeParam,  10> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, solve_IsValidOutput_Success)
-{
-    solve_IsValidOutput_Success<TypeParam,  10> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_IsValidOutput_Success)
-{
-    solve_IsValidOutput_Success<TypeParam,  10> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_1x1_ObviousSolution_Success ()
+TYPED_TEST (MunkresTest, solve_1x1_ObviousSolution_Success)
 {
     // Arrange.
     TypeParam e (1, 1);
@@ -308,40 +166,9 @@ void solve_1x1_ObviousSolution_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_1x1_ObviousSolution_Success)
-{
-    solve_1x1_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_1x1_ObviousSolution_Success)
-{
-    solve_1x1_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_1x1_ObviousSolution_Success)
-{
-    solve_1x1_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_1x1_ObviousSolution_Success)
-{
-    solve_1x1_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, solve_1x1_ObviousSolution_Success)
-{
-    solve_1x1_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_1x1_ObviousSolution_Success)
-{
-    solve_1x1_ObviousSolution_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_2x2_ObviousSolution_Success ()
+TYPED_TEST (MunkresTest, solve_2x2_ObviousSolution_Success)
 {
     // Arrange.
     TypeParam e (2, 2);
@@ -359,40 +186,9 @@ void solve_2x2_ObviousSolution_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_2x2_ObviousSolution_Success)
-{
-    solve_2x2_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_2x2_ObviousSolution_Success)
-{
-    solve_2x2_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_2x2_ObviousSolution_Success)
-{
-    solve_2x2_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_2x2_ObviousSolution_Success)
-{
-    solve_2x2_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, solve_2x2_ObviousSolution_Success)
-{
-    solve_2x2_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_2x2_ObviousSolution_Success)
-{
-    solve_2x2_ObviousSolution_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_3x3_ObviousSolution_Success ()
+TYPED_TEST (MunkresTest, solve_3x3_ObviousSolution_Success)
 {
     // Arrange.
     TypeParam e (3, 3);
@@ -412,45 +208,9 @@ void solve_3x3_ObviousSolution_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_3x3_ObviousSolution_Success)
-{
-    solve_3x3_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x3_ObviousSolution_Success)
-{
-    solve_3x3_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_3x3_ObviousSolution_Success)
-{
-    solve_3x3_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_3x3_ObviousSolution_Success)
-{
-    solve_3x3_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, solve_3x3_ObviousSolution_Success)
-{
-    solve_3x3_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixQt, solve_3x3_ObviousSolution_Success)
-{
-    solve_3x3_ObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_3x3_ObviousSolution_Success)
-{
-    solve_3x3_ObviousSolution_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_3x2_NonObviousSolution_Success ()
+TYPED_TEST (MunkresTest, solve_3x2_NonObviousSolution_Success)
 {
     // Arrange.
     TypeParam e (3, 2);
@@ -470,36 +230,10 @@ void solve_3x2_NonObviousSolution_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_3x2_NonObviousSolution_Success)
-{
-    solve_3x2_NonObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x2_NonObviousSolution_Success)
-{
-    solve_3x2_NonObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_3x2_NonObviousSolution_Success)
-{
-    solve_3x2_NonObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_3x2_NonObviousSolution_Success)
-{
-    solve_3x2_NonObviousSolution_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_3x2_NonObviousSolution_Success)
-{
-    solve_3x2_NonObviousSolution_Success<TypeParam> ();
-}
-
 
 
 // This is simplified version of test case #008.
-template<typename TypeParam>
-void solve_3x2_NonObviousSolutionCase002_Success ()
+TYPED_TEST (MunkresTest, solve_3x2_NonObviousSolutionCase002_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -521,36 +255,10 @@ void solve_3x2_NonObviousSolutionCase002_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_3x2_NonObviousSolutionCase002_Success)
-{
-    solve_3x2_NonObviousSolutionCase002_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x2_NonObviousSolutionCase002_Success)
-{
-    solve_3x2_NonObviousSolutionCase002_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_3x2_NonObviousSolutionCase002_Success)
-{
-    solve_3x2_NonObviousSolutionCase002_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_3x2_NonObviousSolutionCase002_Success)
-{
-    solve_3x2_NonObviousSolutionCase002_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_3x2_NonObviousSolutionCase002_Success)
-{
-    solve_3x2_NonObviousSolutionCase002_Success<TypeParam> ();
-}
-
 
 
 // This is simplified version of test case #009 (transposed version of test case 002).
-template<typename TypeParam>
-void solve_2x3_NonObviousSolutionCase003_Success ()
+TYPED_TEST (MunkresTest, solve_2x3_NonObviousSolutionCase003_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -571,36 +279,10 @@ void solve_2x3_NonObviousSolutionCase003_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_2x3_NonObviousSolutionCase003_Success)
-{
-    solve_2x3_NonObviousSolutionCase003_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_2x3_NonObviousSolutionCase003_Success)
-{
-    solve_2x3_NonObviousSolutionCase003_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_2x3_NonObviousSolutionCase003_Success)
-{
-    solve_2x3_NonObviousSolutionCase003_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_2x3_NonObviousSolutionCase003_Success)
-{
-    solve_2x3_NonObviousSolutionCase003_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_2x3_NonObviousSolutionCase003_Success)
-{
-    solve_2x3_NonObviousSolutionCase003_Success<TypeParam> ();
-}
-
 
 
 // This is test case based on test case #002, but extended by one "impossible" task and one "lazy" worker.
-template<typename TypeParam>
-void solve_4x3_NonObviousSolutionCase004_Success ()
+TYPED_TEST (MunkresTest, solve_4x3_NonObviousSolutionCase004_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -629,36 +311,10 @@ void solve_4x3_NonObviousSolutionCase004_Success ()
     EXPECT_EQ (e (3, 1), t (3, 1) );
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_4x3_NonObviousSolutionCase004_Success)
-{
-    solve_4x3_NonObviousSolutionCase004_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_4x3_NonObviousSolutionCase004_Success)
-{
-    solve_4x3_NonObviousSolutionCase004_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_4x3_NonObviousSolutionCase004_Success)
-{
-    solve_4x3_NonObviousSolutionCase004_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_4x3_NonObviousSolutionCase004_Success)
-{
-    solve_4x3_NonObviousSolutionCase004_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_4x3_NonObviousSolutionCase004_Success)
-{
-    solve_4x3_NonObviousSolutionCase004_Success<TypeParam> ();
-}
-
 
 
 // This is test case based on test case #003, but extended by one "impossible" task and one "lazy" worker.
-template<typename TypeParam>
-void solve_3x4_NonObviousSolutionCase005_Success ()
+TYPED_TEST (MunkresTest, solve_3x4_NonObviousSolutionCase005_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -687,35 +343,9 @@ void solve_3x4_NonObviousSolutionCase005_Success ()
     EXPECT_EQ (e (1, 3), t (1, 3) );
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_3x4_NonObviousSolutionCase005_Success)
-{
-    solve_3x4_NonObviousSolutionCase005_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x4_NonObviousSolutionCase005_Success)
-{
-    solve_3x4_NonObviousSolutionCase005_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_3x4_NonObviousSolutionCase005_Success)
-{
-    solve_3x4_NonObviousSolutionCase005_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_3x4_NonObviousSolutionCase005_Success)
-{
-    solve_3x4_NonObviousSolutionCase005_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_3x4_NonObviousSolutionCase005_Success)
-{
-    solve_3x4_NonObviousSolutionCase005_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_3x3_NonObviousSolutionCase006_Success ()
+TYPED_TEST (MunkresTest, solve_3x3_NonObviousSolutionCase006_Success)
 {
     // Arrange.
     TypeParam e (3, 3);
@@ -735,45 +365,9 @@ void solve_3x3_NonObviousSolutionCase006_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_3x3_NonObviousSolutionCase006_Success)
-{
-    solve_3x3_NonObviousSolutionCase006_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x3_NonObviousSolutionCase006_Success)
-{
-    solve_3x3_NonObviousSolutionCase006_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_3x3_NonObviousSolutionCase006_Success)
-{
-    solve_3x3_NonObviousSolutionCase006_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_3x3_NonObviousSolutionCase006_Success)
-{
-    solve_3x3_NonObviousSolutionCase006_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, solve_3x3_NonObviousSolutionCase006_Success)
-{
-    solve_3x3_NonObviousSolutionCase006_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixQt, solve_3x3_NonObviousSolutionCase006_Success)
-{
-    solve_3x3_NonObviousSolutionCase006_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_3x3_NonObviousSolutionCase006_Success)
-{
-    solve_3x3_NonObviousSolutionCase006_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_3x3_NonObviousSolutionCase007_Success ()
+TYPED_TEST (MunkresTest, solve_3x3_NonObviousSolutionCase007_Success)
 {
     // Arrange.
     TypeParam e (3, 3);
@@ -793,45 +387,9 @@ void solve_3x3_NonObviousSolutionCase007_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, solve_3x3_NonObviousSolutionCase007_Success)
-{
-    solve_3x3_NonObviousSolutionCase007_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x3_NonObviousSolutionCase007_Success)
-{
-    solve_3x3_NonObviousSolutionCase007_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_3x3_NonObviousSolutionCase007_Success)
-{
-    solve_3x3_NonObviousSolutionCase007_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_3x3_NonObviousSolutionCase007_Success)
-{
-    solve_3x3_NonObviousSolutionCase007_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, solve_3x3_NonObviousSolutionCase007_Success)
-{
-    solve_3x3_NonObviousSolutionCase007_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixQt, solve_3x3_NonObviousSolutionCase007_Success)
-{
-    solve_3x3_NonObviousSolutionCase007_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_3x3_NonObviousSolutionCase007_Success)
-{
-    solve_3x3_NonObviousSolutionCase007_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_6x4_NonObviousSolutionCase008_Success ()
+TYPED_TEST (MunkresFloatingTest, solve_6x4_NonObviousSolutionCase008_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -878,15 +436,9 @@ void solve_6x4_NonObviousSolutionCase008_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestFloatingResizeable, solve_6x4_NonObviousSolutionCase008_Success)
-{
-    solve_6x4_NonObviousSolutionCase008_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_4x6_NonObviousSolutionCase009_Success ()
+TYPED_TEST (MunkresFloatingTest, solve_4x6_NonObviousSolutionCase009_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -931,15 +483,9 @@ void solve_4x6_NonObviousSolutionCase009_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestFloatingResizeable, solve_4x6_NonObviousSolutionCase009_Success)
-{
-    solve_4x6_NonObviousSolutionCase009_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_3x3_NonObviousSolutionCase010_Success ()
+TYPED_TEST (MunkresFloatingTest, solve_3x3_NonObviousSolutionCase010_Success)
 {
     // Arrange.
     using value_type = typename TypeParam::matrix_base::value_type;
@@ -958,15 +504,9 @@ void solve_3x3_NonObviousSolutionCase010_Success ()
     EXPECT_NE (0, t (0, 0) );
 }
 
-TYPED_TEST (MunkresTestFloating, solve_3x3_NonObviousSolutionCase010_Success)
-{
-    solve_3x3_NonObviousSolutionCase010_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void solve_3x3_IsValid_Fail ()
+TYPED_TEST (MunkresTest, solve_3x3_IsValid_Fail)
 {
     // Arrange.
     TypeParam e (3, 3);
@@ -990,39 +530,4 @@ void solve_3x3_IsValid_Fail ()
         return !MatrixCompare<TypeParam> (e, t);
     };
     EXPECT_PRED2 (NotMatrixCompare, e, t);
-}
-
-TYPED_TEST (MunkresTestMatrixMunkres, solve_3x3_IsValid_Fail)
-{
-    solve_3x3_IsValid_Fail<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, solve_3x3_IsValid_Fail)
-{
-    solve_3x3_IsValid_Fail<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, solve_3x3_IsValid_Fail)
-{
-    solve_3x3_IsValid_Fail<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, solve_3x3_IsValid_Fail)
-{
-    solve_3x3_IsValid_Fail<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, solve_3x3_IsValid_Fail)
-{
-    solve_3x3_IsValid_Fail<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixQt, solve_3x3_IsValid_Fail)
-{
-    solve_3x3_IsValid_Fail<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, solve_3x3_IsValid_Fail)
-{
-    solve_3x3_IsValid_Fail<TypeParam> ();
 }

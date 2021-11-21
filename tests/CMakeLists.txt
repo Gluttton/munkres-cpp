@@ -11,11 +11,15 @@ ExternalProject_Add (
     googletest
     GIT_REPOSITORY  "https://github.com/google/googletest.git"
     GIT_TAG         "release-1.10.0"
+    PATCH_COMMAND    git apply "${PROJECT_SOURCE_DIR}/tests/switch-on-Python-3.patch"
+                 &&  git apply "${PROJECT_SOURCE_DIR}/tests/increase-length-of-type-list.patch"
+    COMMAND          ./googletest/scripts/pump.py googletest/include/gtest/internal/gtest-type-util.h.pump
     CMAKE_ARGS      "-DCMAKE_BUILD_TYPE=Release"
     SOURCE_DIR      "${CMAKE_CURRENT_BINARY_DIR}/googletest"
     BINARY_DIR      "${CMAKE_CURRENT_BINARY_DIR}/googletest"
     INSTALL_COMMAND ""
     TEST_COMMAND    ""
+    UPDATE_DISCONNECTED 1
 )
 set_target_properties (googletest PROPERTIES EXCLUDE_FROM_ALL TRUE)
 set (GTEST_ROOT             "${CMAKE_CURRENT_BINARY_DIR}/googletest")

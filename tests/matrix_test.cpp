@@ -1,12 +1,9 @@
 #include <gtest/gtest.h>
 #include "matrix_test.h"
-#include <iostream>
-#include <iomanip>
 
 
 
-template<typename TypeParam>
-void resize_From1x1To2x2WithDefaultValueDefaulted_Success ()
+TYPED_TEST (MunkresTest, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
 {
     // Arrange.
     TypeParam e (2, 2);
@@ -23,40 +20,9 @@ void resize_From1x1To2x2WithDefaultValueDefaulted_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, resize_From1x1To2x2WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To2x2WithDefaultValueDefaulted_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void resize_From1x1To5x5WithDefaultValueDefaulted_Success ()
+TYPED_TEST (MunkresTest, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
 {
     // Arrange.
     TypeParam e (5, 5);
@@ -76,40 +42,9 @@ void resize_From1x1To5x5WithDefaultValueDefaulted_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, resize_From1x1To5x5WithDefaultValueDefaulted_Success)
-{
-    resize_From1x1To5x5WithDefaultValueDefaulted_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void resize_From5x5To3x3WithDefaultValueDefaulted_Success ()
+TYPED_TEST (MunkresTest, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
 {
     // Arrange.
     TypeParam e (3, 3);
@@ -131,40 +66,9 @@ void resize_From5x5To3x3WithDefaultValueDefaulted_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
-{
-    resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
-{
-    resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
-{
-    resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
-{
-    resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
-{
-    resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, resize_From5x5To3x3WithDefaultValueDefaulted_Success)
-{
-    resize_From5x5To3x3WithDefaultValueDefaulted_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void resize_From2x2To4x4WithDefaultValueExplicit_Success ()
+TYPED_TEST (MunkresTest, resize_From2x2To4x4WithDefaultValueExplicit_Success)
 {
     // Arrange.
     TypeParam e (4, 4);
@@ -184,52 +88,16 @@ void resize_From2x2To4x4WithDefaultValueExplicit_Success ()
     EXPECT_PRED2 (MatrixCompare<TypeParam>, e, t);
 }
 
-TYPED_TEST (MunkresTestMatrixMunkres, resize_From2x2To4x4WithDefaultValueExplicit_Success)
-{
-    resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixArmadillo, resize_From2x2To4x4WithDefaultValueExplicit_Success)
-{
-    resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixBoost, resize_From2x2To4x4WithDefaultValueExplicit_Success)
-{
-    resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixEigen, resize_From2x2To4x4WithDefaultValueExplicit_Success)
-{
-    resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixOpencv, resize_From2x2To4x4WithDefaultValueExplicit_Success)
-{
-    resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
-}
-
-TYPED_TEST (MunkresTestMatrixStd2dvector, resize_From2x2To4x4WithDefaultValueExplicit_Success)
-{
-    resize_From2x2To4x4WithDefaultValueExplicit_Success<TypeParam> ();
-}
 
 
-
-template<typename TypeParam>
-void resize_bad_alloc_Throw ()
+TYPED_TEST (MunkresTest, resize_bad_alloc_Throw)
 {
     // Arrange.
     TypeParam t (1, 1);
     t(0, 0)=0.0;
 
     // Act, Assert.
-    EXPECT_THROW (t.resize (1, std::numeric_limits<size_t>::max () ), std::bad_alloc);
-}
-
-TYPED_TEST (MunkresTestMatrixMunkres, resize_bad_alloc_Throw)
-{
-    resize_bad_alloc_Throw<TypeParam> ();
+    EXPECT_ANY_THROW (t.resize (1, std::numeric_limits<size_t>::max () ) );
 }
 
 
