@@ -85,15 +85,4 @@ if (MUNKRESCPP_DEVEL_MODE)
         tests
         benchmarks
     )
-
-
-    # Static code analyse.
-    set (CppCheck_REPORT ${PROJECT_BINARY_DIR}/cppcheck.report)
-    add_custom_command (
-        OUTPUT  ${CppCheck_REPORT}
-        COMMAND cppcheck ${MunkresCpp_HEADERS} ${MunkresCppBin_SOURCES} -I${PROJECT_SOURCE_DIR}/src -I${PROJECT_SOURCE_DIR}
-                                                                        --enable=all --language=c++ --force --inconclusive > cppcheck.report 2>&1
-    )
-    add_custom_target  (cppcheck DEPENDS ${CppCheck_REPORT})
-    set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CppCheck_REPORT})
 endif ()

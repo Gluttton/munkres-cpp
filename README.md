@@ -101,8 +101,7 @@ Requirements:
  - [CMake](http://www.cmake.org/) (2.8.12);  
  - the test suite requires the [Google C++ Test Framework](http://code.google.com/p/googletest/);  
  - microbenchmaring requires [Benchmark](https://github.com/google/benchmark), [Celero](https://github.com/DigitalInBlue/Celero), [Hayai](https://github.com/nickbruun/hayai) and [gprof](http://www.gnu.org/software/binutils/);  
- - code coverage requires [gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and lcov;  
- - static code analysis requires [cppcheck](https://github.com/danmar/cppcheck).  
+ - code coverage requires [gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and lcov.  
 
 
 
@@ -167,12 +166,6 @@ Lunch performance analyze.
 $ <build microbenchmarks and generate data set>
 $ benchmarks/tests/munkresbenchmark_gprof.bin
 $ gprof benchmarks/tests/munkresbenchmark_gprof.bin gmon.out -p -b
-```
-
-
-Lunch static code analyze.
-```
-$ make cppcheck
 ```
 
 

@@ -2,7 +2,6 @@ stages:
     - test
     - examples
     - benchmarks
-    - cppcheck
 
 
 test_job:
@@ -61,22 +60,6 @@ benchmarks_job:
         - rm -rf CMake*
         - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRESCPP_DEVEL_MODE=ON -DMUNKRES_CPP_MATRIX_TYPE=matrix_eigen -DMUNKRES_CPP_VALUE_TYPE=unsigned\ int ${BUILD_DIR}/..
         - make benchmarks
-    only:
-        - devel
-        - merge_requests
-
-
-cppcheck_job:
-    stage: cppcheck
-    image: registry.gitlab.com/gluttton/munkres-cpp
-    before_script:
-        - BUILD_DIR=`pwd`/build
-        - mkdir -p ${BUILD_DIR}
-        - cd ${BUILD_DIR}
-        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRESCPP_DEVEL_MODE=ON ${BUILD_DIR}/..
-    script:
-        - make cppcheck
-        - cat cppcheck.report
     only:
         - devel
         - merge_requests
