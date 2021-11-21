@@ -20,26 +20,27 @@
 #define _ADAPTERS_TEST_H_
 
 #include "munkres-cpp/matrix.h"
-#include "munkres-cpp/adapters/matrix_std_2d_vector.h"
 
-#ifdef MUNKRES_CPP_ARMADILLO
+#if ARMADILLO_FOUND == 1
 #include "munkres-cpp/adapters/matrix_armadillo.h"
 #endif
 
-#ifdef MUNKRES_CPP_BOOST
+#if BOOST_FOUND == 1
 #include "munkres-cpp/adapters/matrix_boost.h"
 #endif
 
-#ifdef MUNKRES_CPP_EIGEN3
+#if EIGEN3_FOUND == 1
 #include "munkres-cpp/adapters/matrix_eigen.h"
 #endif
 
-#ifdef MUNKRES_CPP_OPENCV
+#if OPENCV_FOUND == 1
 #include "munkres-cpp/adapters/matrix_opencv.h"
 #endif
 
-#ifdef MUNKRES_CPP_QT
+#if QT5_FOUND == 1
 #include "munkres-cpp/adapters/matrix_qt.h"
 #endif
+
+#include "munkres-cpp/adapters/matrix_std_2d_vector.h"
 
 #endif /* !defined(_ADAPTERS_TEST_H_) */

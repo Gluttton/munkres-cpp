@@ -20,32 +20,33 @@
 #define _MATRIX_TEST_UTILS_H_
 
 #include "munkres-cpp/matrix.h"
-#include "munkres-cpp/adapters/matrix_std_2d_vector.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <random>
 #include <limits>
 
-#ifdef MUNKRES_CPP_ARMADILLO
+#if ARMADILLO_FOUND == 1
 #include "munkres-cpp/adapters/matrix_armadillo.h"
 #endif
 
-#ifdef MUNKRES_CPP_BOOST
+#if BOOST_FOUND == 1
 #include "munkres-cpp/adapters/matrix_boost.h"
 #endif
 
-#ifdef MUNKRES_CPP_EIGEN3
+#if EIGEN3_FOUND == 1
 #include "munkres-cpp/adapters/matrix_eigen.h"
 #endif
 
-#ifdef MUNKRES_CPP_OPENCV
+#if OPENCV_FOUND == 1
 #include "munkres-cpp/adapters/matrix_opencv.h"
 #endif
 
-#ifdef MUNKRES_CPP_QT
+#if QT5_FOUND == 1
 #include "munkres-cpp/adapters/matrix_qt.h"
 #endif
+
+#include "munkres-cpp/adapters/matrix_std_2d_vector.h"
 
 
 
@@ -163,7 +164,7 @@ std::istream & operator >> (std::istream & is, munkres_cpp::Matrix<T> & m)
     return read_matrix (is, m);
 }
 
-#ifdef MUNKRES_CPP_ARMADILLO
+#if ARMADILLO_FOUND == 1
 template<class T>
 std::istream & operator >> (std::istream & is, munkres_cpp::matrix_armadillo<T> & m)
 {
@@ -171,7 +172,7 @@ std::istream & operator >> (std::istream & is, munkres_cpp::matrix_armadillo<T> 
 }
 #endif
 
-#ifdef MUNKRES_CPP_BOOST
+#if BOOST_FOUND == 1
 template<class T>
 std::istream & operator >> (std::istream & is, munkres_cpp::matrix_boost<T> & m)
 {
@@ -179,7 +180,7 @@ std::istream & operator >> (std::istream & is, munkres_cpp::matrix_boost<T> & m)
 }
 #endif
 
-#ifdef MUNKRES_CPP_EIGEN3
+#if EIGEN3_FOUND == 1
 template<class T>
 std::istream & operator >> (std::istream & is, munkres_cpp::matrix_eigen<T> & m)
 {
@@ -187,7 +188,7 @@ std::istream & operator >> (std::istream & is, munkres_cpp::matrix_eigen<T> & m)
 }
 #endif
 
-#ifdef MUNKRES_CPP_OPENCV
+#if OPENCV_FOUND == 1
 template<class T>
 std::istream & operator >> (std::istream & is, munkres_cpp::matrix_opencv<T> & m)
 {
@@ -195,7 +196,7 @@ std::istream & operator >> (std::istream & is, munkres_cpp::matrix_opencv<T> & m
 }
 #endif
 
-#ifdef MUNKRES_CPP_QT
+#if QT5_FOUND == 1
 template<class T, int N, int M>
 std::istream & operator >> (std::istream & is, munkres_cpp::matrix_qt<T, N, M> & m)
 {

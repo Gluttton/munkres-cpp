@@ -3,46 +3,10 @@ find_package (Boost     COMPONENTS  system)
 find_package (Eigen3)
 find_package (OpenCV    COMPONENTS  core)
 
-if (ARMADILLO_FOUND)
-    add_definitions (-DMUNKRES_CPP_ARMADILLO)
-endif ()
-if (Boost_FOUND)
-    add_definitions (-DMUNKRES_CPP_BOOST)
-endif ()
-if (EIGEN3_FOUND)
-    add_definitions (-DMUNKRES_CPP_EIGEN3)
-endif ()
-if (OpenCV_FOUND)
-    add_definitions (-DMUNKRES_CPP_OPENCV)
-    set (CMAKE_EXE_LINKER_FLAGS "-l${OpenCV_LIBS}")
-endif ()
-
-include_directories (${OPENCV_INCLUDE_DIRS})
-include_directories (${ARMADILLO_INCLUDE_DIRS})
-include_directories (${EIGEN3_INCLUDE_DIR})
-
-if (NOT DEFINED MUNKRES_CPP_VALUE_TYPE)
-    set (MUNKRES_CPP_VALUE_TYPE long\ unsigned\ int)
-endif ()
-if (NOT DEFINED MUNKRES_CPP_MATRIX_TYPE)
-    set (MUNKRES_CPP_MATRIX_TYPE matrix_eigen)
-endif ()
-
-add_definitions (-DMUNKRES_CPP_VALUE_TYPE=${MUNKRES_CPP_VALUE_TYPE})
-add_definitions (-DMUNKRES_CPP_MATRIX_TYPE=${MUNKRES_CPP_MATRIX_TYPE})
-
-
-# Data generator.
-include_directories (${OpenCV_INCLUDE_DIRS})
-add_executable (
-    generator EXCLUDE_FROM_ALL
-    ${CMAKE_CURRENT_SOURCE_DIR}/generator.cpp
-)
-
 
 # Benchmark based on the Celero Framework.
-ExternalProject_Add (
-    Celero
+include (ExternalProject)
+ExternalProject_Add (Celero
     GIT_REPOSITORY "https://github.com/DigitalInBlue/Celero.git"
     GIT_TAG "v2.8.2"
     PATCH_COMMAND eval "sed 's/CACHE.*FORCE//g' CMakeLists.txt > CMakeLists.mod && mv CMakeLists.mod CMakeLists.txt"
@@ -57,28 +21,72 @@ set (CELERO_FOUND true)
 set (CELERO_INCLUDE_DIR "${PROJECT_BINARY_DIR}/Celero/include")
 set (CELERO_LIBRARY "${PROJECT_BINARY_DIR}/CeleroBuild/libcelero.so")
 
-set (MunkresCppBenchmarkCelero_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
-add_executable (munkresbenchmark EXCLUDE_FROM_ALL ${MunkresCppBenchmarkCelero_SOURCES})
-include_directories (${CELERO_INCLUDE_DIR})
-target_link_libraries (munkresbenchmark ${OpenCV_LIBS} ${CELERO_LIBRARY})
+
+if (NOT DEFINED MUNKRES_CPP_VALUE_TYPE)
+    set (MUNKRES_CPP_VALUE_TYPE long\ unsigned\ int)
+endif ()
+if (NOT DEFINED MUNKRES_CPP_MATRIX_TYPE)
+    set (MUNKRES_CPP_MATRIX_TYPE matrix_eigen)
+endif ()
+
+
+# Data generator.
+add_executable (generator EXCLUDE_FROM_ALL
+    ${CMAKE_CURRENT_SOURCE_DIR}/generator.cpp
+)
+
+target_compile_definitions (generator
+    PRIVATE MUNKRES_CPP_VALUE_TYPE=${MUNKRES_CPP_VALUE_TYPE}
+    PRIVATE MUNKRES_CPP_MATRIX_TYPE=${MUNKRES_CPP_MATRIX_TYPE}
+)
+
+target_include_directories (generator
+    PRIVATE ${CELERO_INCLUDE_DIR}
+    PRIVATE ${ARMADILLO_INCLUDE_DIRS}
+    PRIVATE ${EIGEN3_INCLUDE_DIR}
+    PRIVATE ${OpenCV_INCLUDE_DIRS}
+)
+
+target_link_libraries (generator
+    PRIVATE lp::munkres-cpp
+    PRIVATE ${OpenCV_LIBS}
+)
+
+
+# Test.
+add_executable (munkresbenchmark
+    EXCLUDE_FROM_ALL ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp
+)
+
+target_compile_definitions (munkresbenchmark
+    PRIVATE -DARMADILLO_FOUND=$<BOOL:${ARMADILLO_FOUND}>
+    PRIVATE -DBOOST_FOUND=$<BOOL:${BOOST_FOUND}>
+    PRIVATE -DEIGEN3_FOUND=$<BOOL:${EIGEN3_FOUND}>
+    PRIVATE -DOPENCV_FOUND=$<BOOL:${OpenCV_FOUND}>
+    PRIVATE -DQT5_FOUND=$<BOOL:${Qt5Gui_FOUND}>
+    PRIVATE MUNKRES_CPP_VALUE_TYPE=${MUNKRES_CPP_VALUE_TYPE}
+    PRIVATE MUNKRES_CPP_MATRIX_TYPE=${MUNKRES_CPP_MATRIX_TYPE}
+)
+
+target_include_directories (munkresbenchmark
+    PRIVATE ${CELERO_INCLUDE_DIR}
+    PRIVATE ${ARMADILLO_INCLUDE_DIRS}
+    PRIVATE ${EIGEN3_INCLUDE_DIR}
+    PRIVATE ${OpenCV_INCLUDE_DIRS}
+)
+
+target_link_libraries (munkresbenchmark
+    PRIVATE lp::munkres-cpp
+    PRIVATE Boost::system
+    PRIVATE ${OpenCV_LIBS}
+    PRIVATE ${CELERO_LIBRARY}
+)
+
 add_dependencies (munkresbenchmark Celero)
 
 
-# Prevent launch tests before will be generated test data set.
-set (BenchmarkDataSet ${PROJECT_BINARY_DIR}/matrices.txt)
-add_custom_command (
-    OUTPUT ${BenchmarkDataSet}
-    COMMAND cd ${PROJECT_BINARY_DIR} && ./benchmarks/generator 20
-)
-add_custom_target (generate_benchmark_dataset DEPENDS ${BenchmarkDataSet})
-add_dependencies (generate_benchmark_dataset generator)
-
-add_dependencies (munkresbenchmark generate_benchmark_dataset)
-
-
-add_custom_target  (benchmarks)
-add_dependencies (
-    benchmarks
-    munkresbenchmark
+add_custom_target (benchmarks)
+add_dependencies  (benchmarks
     generator
+    munkresbenchmark
 )

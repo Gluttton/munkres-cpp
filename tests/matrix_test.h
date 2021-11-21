@@ -22,23 +22,23 @@
 #include "munkres-cpp/matrix.h"
 #include "matrix_test_utils.h"
 
-#ifdef MUNKRES_CPP_ARMADILLO
+#if ARMADILLO_FOUND == 1
 #include "munkres-cpp/adapters/matrix_armadillo.h"
 #endif
 
-#ifdef MUNKRES_CPP_BOOST
+#if BOOST_FOUND == 1
 #include "munkres-cpp/adapters/matrix_boost.h"
 #endif
 
-#ifdef MUNKRES_CPP_EIGEN3
+#if EIGEN3_FOUND == 1
 #include "munkres-cpp/adapters/matrix_eigen.h"
 #endif
 
-#ifdef MUNKRES_CPP_OPENCV
+#if OPENCV_FOUND == 1
 #include "munkres-cpp/adapters/matrix_opencv.h"
 #endif
 
-#ifdef MUNKRES_CPP_QT
+#if QT5_FOUND == 1
 #include "munkres-cpp/adapters/matrix_qt.h"
 #endif
 
@@ -59,7 +59,7 @@ typedef ::testing::Types <
     , munkres_cpp::Matrix               <float>
     , munkres_cpp::Matrix               <double>
     , munkres_cpp::Matrix               <long double>
-    #ifdef MUNKRES_CPP_ARMADILLO
+    #if ARMADILLO_FOUND == 1
     , munkres_cpp::matrix_armadillo     <uint8_t>
     , munkres_cpp::matrix_armadillo     <int16_t>
     , munkres_cpp::matrix_armadillo     <uint16_t>
@@ -70,7 +70,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_armadillo     <float>
     , munkres_cpp::matrix_armadillo     <double>
     #endif
-    #ifdef MUNKRES_CPP_BOOST
+    #if BOOST_FOUND == 1
     , munkres_cpp::matrix_boost         <int8_t>
     , munkres_cpp::matrix_boost         <uint8_t>
     , munkres_cpp::matrix_boost         <int16_t>
@@ -83,7 +83,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_boost         <double>
     , munkres_cpp::matrix_boost         <long double>
     #endif
-    #ifdef MUNKRES_CPP_EIGEN3
+    #if EIGEN3_FOUND == 1
     , munkres_cpp::matrix_eigen         <int8_t>
     , munkres_cpp::matrix_eigen         <uint8_t>
     , munkres_cpp::matrix_eigen         <int16_t>
@@ -96,7 +96,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_eigen         <double>
     , munkres_cpp::matrix_eigen         <long double>
     #endif
-    #ifdef MUNKRES_CPP_OPENCV
+    #if OPENCV_FOUND == 1
     , munkres_cpp::matrix_opencv        <int8_t>
     , munkres_cpp::matrix_opencv        <uint8_t>
     , munkres_cpp::matrix_opencv        <int16_t>
@@ -105,7 +105,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_opencv        <float>
     , munkres_cpp::matrix_opencv        <double>
     #endif
-    #ifdef MUNKRES_CPP_QT
+    #if QT5_FOUND == 1
     #if 0
     , munkres_cpp::matrix_qt            <int8_t,      3, 3>
     , munkres_cpp::matrix_qt            <uint8_t,     3, 3>
@@ -145,14 +145,14 @@ typedef ::testing::Types <
     , munkres_cpp::Matrix               <float>
     , munkres_cpp::Matrix               <double>
     , munkres_cpp::Matrix               <long double>
-    #ifdef MUNKRES_CPP_ARMADILLO
+    #if ARMADILLO_FOUND == 1
     , munkres_cpp::matrix_armadillo     <int16_t>
     , munkres_cpp::matrix_armadillo     <int32_t>
     , munkres_cpp::matrix_armadillo     <int64_t>
     , munkres_cpp::matrix_armadillo     <float>
     , munkres_cpp::matrix_armadillo     <double>
     #endif
-    #ifdef MUNKRES_CPP_BOOST
+    #if BOOST_FOUND == 1
     , munkres_cpp::matrix_boost         <int8_t>
     , munkres_cpp::matrix_boost         <int16_t>
     , munkres_cpp::matrix_boost         <int32_t>
@@ -161,7 +161,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_boost         <double>
     , munkres_cpp::matrix_boost         <long double>
     #endif
-    #ifdef MUNKRES_CPP_EIGEN3
+    #if EIGEN3_FOUND == 1
     , munkres_cpp::matrix_eigen         <int8_t>
     , munkres_cpp::matrix_eigen         <int16_t>
     , munkres_cpp::matrix_eigen         <int32_t>
@@ -170,7 +170,7 @@ typedef ::testing::Types <
     , munkres_cpp::matrix_eigen         <double>
     , munkres_cpp::matrix_eigen         <long double>
     #endif
-    #ifdef MUNKRES_CPP_OPENCV
+    #if OPENCV_FOUND == 1
     , munkres_cpp::matrix_opencv        <int8_t>
     , munkres_cpp::matrix_opencv        <int16_t>
     , munkres_cpp::matrix_opencv        <int32_t>
@@ -194,21 +194,21 @@ typedef ::testing::Types <
       munkres_cpp::Matrix               <float>
     , munkres_cpp::Matrix               <double>
     , munkres_cpp::Matrix               <long double>
-    #ifdef MUNKRES_CPP_ARMADILLO
+    #if ARMADILLO_FOUND == 1
     , munkres_cpp::matrix_armadillo     <float>
     , munkres_cpp::matrix_armadillo     <double>
     #endif
-    #ifdef MUNKRES_CPP_BOOST
+    #if BOOST_FOUND == 1
     , munkres_cpp::matrix_boost         <float>
     , munkres_cpp::matrix_boost         <double>
     , munkres_cpp::matrix_boost         <long double>
     #endif
-    #ifdef MUNKRES_CPP_EIGEN3
+    #if EIGEN3_FOUND == 1
     , munkres_cpp::matrix_eigen         <float>
     , munkres_cpp::matrix_eigen         <double>
     , munkres_cpp::matrix_eigen         <long double>
     #endif
-    #ifdef MUNKRES_CPP_OPENCV
+    #if OPENCV_FOUND == 1
     , munkres_cpp::matrix_opencv        <float>
     , munkres_cpp::matrix_opencv        <double>
     #endif

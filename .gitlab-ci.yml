@@ -11,7 +11,7 @@ test_job:
         - BUILD_DIR=`pwd`/build
         - mkdir -p ${BUILD_DIR}
         - cd ${BUILD_DIR}
-        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRESCPP_DEVEL_MODE=ON ${BUILD_DIR}/..
+        - cmake -DCMAKE_BUILD_TYPE=Debug ${BUILD_DIR}/..
     script:
         - make tests
         - cd ${BUILD_DIR}/tests && ./munkrestest
@@ -46,19 +46,19 @@ benchmarks_job:
         - mkdir -p ${BUILD_DIR}
         - cd ${BUILD_DIR}
     script:
-        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRESCPP_DEVEL_MODE=ON -DMUNKRES_CPP_MATRIX_TYPE=Matrix -DMUNKRES_CPP_VALUE_TYPE=long\ double ${BUILD_DIR}/..
+        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRES_CPP_MATRIX_TYPE=Matrix -DMUNKRES_CPP_VALUE_TYPE=long\ double ${BUILD_DIR}/..
         - make benchmarks
         - rm -rf CMake*
-        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRESCPP_DEVEL_MODE=ON -DMUNKRES_CPP_MATRIX_TYPE=matrix_armadillo -DMUNKRES_CPP_VALUE_TYPE=double ${BUILD_DIR}/..
+        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRES_CPP_MATRIX_TYPE=matrix_armadillo -DMUNKRES_CPP_VALUE_TYPE=double ${BUILD_DIR}/..
         - make benchmarks
         - rm -rf CMake*
-        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRESCPP_DEVEL_MODE=ON -DMUNKRES_CPP_MATRIX_TYPE=matrix_opencv -DMUNKRES_CPP_VALUE_TYPE=float ${BUILD_DIR}/..
+        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRES_CPP_MATRIX_TYPE=matrix_opencv -DMUNKRES_CPP_VALUE_TYPE=float ${BUILD_DIR}/..
         - make benchmarks
         - rm -rf CMake*
-        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRESCPP_DEVEL_MODE=ON -DMUNKRES_CPP_MATRIX_TYPE=matrix_boost -DMUNKRES_CPP_VALUE_TYPE=long\ unsigned\ int ${BUILD_DIR}/..
+        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRES_CPP_MATRIX_TYPE=matrix_boost -DMUNKRES_CPP_VALUE_TYPE=long\ unsigned\ int ${BUILD_DIR}/..
         - make benchmarks
         - rm -rf CMake*
-        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRESCPP_DEVEL_MODE=ON -DMUNKRES_CPP_MATRIX_TYPE=matrix_eigen -DMUNKRES_CPP_VALUE_TYPE=unsigned\ int ${BUILD_DIR}/..
+        - cmake -DCMAKE_BUILD_TYPE=Debug -DMUNKRES_CPP_MATRIX_TYPE=matrix_eigen -DMUNKRES_CPP_VALUE_TYPE=unsigned\ int ${BUILD_DIR}/..
         - make benchmarks
     only:
         - devel
