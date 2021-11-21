@@ -114,13 +114,4 @@ if (MUNKRESCPP_DEVEL_MODE)
     add_executable (munkres_dummy.bin EXCLUDE_FROM_ALL ${PROJECT_SOURCE_DIR}/tests/warnings_test.cpp)
     add_custom_target (warnings)
     add_dependencies  (warnings munkres_dummy.bin)
-
-    # Code format.
-    set (UNCRUSTIFY_LST ${PROJECT_BINARY_DIR}/uncrustify.lst)
-    set (UNCRUSTIFY_CFG ${PROJECT_SOURCE_DIR}/uncrustify.cfg)
-    add_custom_target (
-        beauty
-        COMMAND find ${PROJECT_SOURCE_DIR} -name '*.cpp' -o -name '*.h' | grep -v ${PROJECT_BINARY_DIR} > ${UNCRUSTIFY_LST}
-        COMMAND uncrustify -c ${UNCRUSTIFY_CFG} -F ${UNCRUSTIFY_LST} --no-backup -l CPP
-    )
 endif ()

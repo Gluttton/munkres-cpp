@@ -102,8 +102,7 @@ Requirements:
  - the test suite requires the [Google C++ Test Framework](http://code.google.com/p/googletest/);  
  - microbenchmaring requires [Benchmark](https://github.com/google/benchmark), [Celero](https://github.com/DigitalInBlue/Celero), [Hayai](https://github.com/nickbruun/hayai) and [gprof](http://www.gnu.org/software/binutils/);  
  - code coverage requires [gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and lcov;  
- - static code analysis requires [cppcheck](https://github.com/danmar/cppcheck);  
- - source code formatting requires [uncrustify](http://uncrustify.sourceforge.net).  
+ - static code analysis requires [cppcheck](https://github.com/danmar/cppcheck).  
 
 
 
@@ -174,15 +173,6 @@ $ gprof benchmarks/tests/munkresbenchmark_gprof.bin gmon.out -p -b
 Lunch static code analyze.
 ```
 $ make cppcheck
-```
-
-
-Lunch code formatter.
-Code formatter is used to convert style of each contributor to common style and make code easier to read.  
-In the project [Uncrustify](http://uncrustify.sourceforge.net) is used as code formatter.  
-Modified code before commit should be formatted using Uncrustify.  
-```
-$ make beauty
 ```
 
 
