@@ -48,98 +48,86 @@
 
 template <typename T> class MunkresTest : public ::testing::Test {};
 typedef ::testing::Types <
-      munkres_cpp::Matrix               <signed             char>
-    , munkres_cpp::Matrix               <unsigned           char>
-    , munkres_cpp::Matrix               <signed   short     int>
-    , munkres_cpp::Matrix               <unsigned short     int>
-    , munkres_cpp::Matrix               <signed             int>
-    , munkres_cpp::Matrix               <unsigned           int>
-    , munkres_cpp::Matrix               <signed   long      int>
-    , munkres_cpp::Matrix               <unsigned long      int>
-    , munkres_cpp::Matrix               <signed   long long int>
-    , munkres_cpp::Matrix               <unsigned long long int>
+      munkres_cpp::Matrix               <int8_t>
+    , munkres_cpp::Matrix               <uint8_t>
+    , munkres_cpp::Matrix               <int16_t>
+    , munkres_cpp::Matrix               <uint16_t>
+    , munkres_cpp::Matrix               <int32_t>
+    , munkres_cpp::Matrix               <uint32_t>
+    , munkres_cpp::Matrix               <int64_t>
+    , munkres_cpp::Matrix               <uint64_t>
     , munkres_cpp::Matrix               <float>
     , munkres_cpp::Matrix               <double>
     , munkres_cpp::Matrix               <long double>
     #ifdef MUNKRES_CPP_ARMADILLO
-    , munkres_cpp::matrix_armadillo     <unsigned           char>
-    , munkres_cpp::matrix_armadillo     <signed   short     int>
-    , munkres_cpp::matrix_armadillo     <unsigned short     int>
-    , munkres_cpp::matrix_armadillo     <signed             int>
-    , munkres_cpp::matrix_armadillo     <unsigned           int>
-    , munkres_cpp::matrix_armadillo     <signed   long      int>
-    , munkres_cpp::matrix_armadillo     <unsigned long      int>
-    , munkres_cpp::matrix_armadillo     <signed   long long int>
-    , munkres_cpp::matrix_armadillo     <unsigned long long int>
+    , munkres_cpp::matrix_armadillo     <uint8_t>
+    , munkres_cpp::matrix_armadillo     <int16_t>
+    , munkres_cpp::matrix_armadillo     <uint16_t>
+    , munkres_cpp::matrix_armadillo     <int32_t>
+    , munkres_cpp::matrix_armadillo     <uint32_t>
+    , munkres_cpp::matrix_armadillo     <int64_t>
+    , munkres_cpp::matrix_armadillo     <uint64_t>
     , munkres_cpp::matrix_armadillo     <float>
     , munkres_cpp::matrix_armadillo     <double>
     #endif
     #ifdef MUNKRES_CPP_BOOST
-    , munkres_cpp::matrix_boost         <signed             char>
-    , munkres_cpp::matrix_boost         <unsigned           char>
-    , munkres_cpp::matrix_boost         <signed   short     int>
-    , munkres_cpp::matrix_boost         <unsigned short     int>
-    , munkres_cpp::matrix_boost         <signed             int>
-    , munkres_cpp::matrix_boost         <unsigned           int>
-    , munkres_cpp::matrix_boost         <signed   long      int>
-    , munkres_cpp::matrix_boost         <unsigned long      int>
-    , munkres_cpp::matrix_boost         <signed   long long int>
-    , munkres_cpp::matrix_boost         <unsigned long long int>
+    , munkres_cpp::matrix_boost         <int8_t>
+    , munkres_cpp::matrix_boost         <uint8_t>
+    , munkres_cpp::matrix_boost         <int16_t>
+    , munkres_cpp::matrix_boost         <uint16_t>
+    , munkres_cpp::matrix_boost         <int32_t>
+    , munkres_cpp::matrix_boost         <uint32_t>
+    , munkres_cpp::matrix_boost         <int64_t>
+    , munkres_cpp::matrix_boost         <uint64_t>
     , munkres_cpp::matrix_boost         <float>
     , munkres_cpp::matrix_boost         <double>
     , munkres_cpp::matrix_boost         <long double>
     #endif
     #ifdef MUNKRES_CPP_EIGEN3
-    , munkres_cpp::matrix_eigen         <signed             char>
-    , munkres_cpp::matrix_eigen         <unsigned           char>
-    , munkres_cpp::matrix_eigen         <signed   short     int>
-    , munkres_cpp::matrix_eigen         <unsigned short     int>
-    , munkres_cpp::matrix_eigen         <signed             int>
-    , munkres_cpp::matrix_eigen         <unsigned           int>
-    , munkres_cpp::matrix_eigen         <signed   long      int>
-    , munkres_cpp::matrix_eigen         <unsigned long      int>
-    , munkres_cpp::matrix_eigen         <signed   long long int>
-    , munkres_cpp::matrix_eigen         <unsigned long long int>
+    , munkres_cpp::matrix_eigen         <int8_t>
+    , munkres_cpp::matrix_eigen         <uint8_t>
+    , munkres_cpp::matrix_eigen         <int16_t>
+    , munkres_cpp::matrix_eigen         <uint16_t>
+    , munkres_cpp::matrix_eigen         <int32_t>
+    , munkres_cpp::matrix_eigen         <uint32_t>
+    , munkres_cpp::matrix_eigen         <int64_t>
+    , munkres_cpp::matrix_eigen         <uint64_t>
     , munkres_cpp::matrix_eigen         <float>
     , munkres_cpp::matrix_eigen         <double>
     , munkres_cpp::matrix_eigen         <long double>
     #endif
     #ifdef MUNKRES_CPP_OPENCV
-    , munkres_cpp::matrix_opencv        <signed             char>
-    , munkres_cpp::matrix_opencv        <unsigned           char>
-    , munkres_cpp::matrix_opencv        <signed   short     int>
-    , munkres_cpp::matrix_opencv        <unsigned short     int>
-    , munkres_cpp::matrix_opencv        <signed             int>
+    , munkres_cpp::matrix_opencv        <int8_t>
+    , munkres_cpp::matrix_opencv        <uint8_t>
+    , munkres_cpp::matrix_opencv        <int16_t>
+    , munkres_cpp::matrix_opencv        <uint16_t>
+    , munkres_cpp::matrix_opencv        <int32_t>
     , munkres_cpp::matrix_opencv        <float>
     , munkres_cpp::matrix_opencv        <double>
     #endif
     #ifdef MUNKRES_CPP_QT
     #if 0
-    , munkres_cpp::matrix_qt            <signed             char, 3, 3>
-    , munkres_cpp::matrix_qt            <unsigned           char, 3, 3>
-    , munkres_cpp::matrix_qt            <signed   short     int,  3, 3>
-    , munkres_cpp::matrix_qt            <unsigned short     int,  3, 3>
-    , munkres_cpp::matrix_qt            <signed             int,  3, 3>
-    , munkres_cpp::matrix_qt            <unsigned           int,  3, 3>
-    , munkres_cpp::matrix_qt            <signed   long      int,  3, 3>
-    , munkres_cpp::matrix_qt            <unsigned long      int,  3, 3>
-    , munkres_cpp::matrix_qt            <signed   long long int,  3, 3>
-    , munkres_cpp::matrix_qt            <unsigned long long int,  3, 3>
-    , munkres_cpp::matrix_qt            <float,                   3, 3>
-    , munkres_cpp::matrix_qt            <double,                  3, 3>
-    , munkres_cpp::matrix_qt            <long double,             3, 3>
+    , munkres_cpp::matrix_qt            <int8_t,      3, 3>
+    , munkres_cpp::matrix_qt            <uint8_t,     3, 3>
+    , munkres_cpp::matrix_qt            <int16_t,     3, 3>
+    , munkres_cpp::matrix_qt            <uint16_t,    3, 3>
+    , munkres_cpp::matrix_qt            <int32_t,     3, 3>
+    , munkres_cpp::matrix_qt            <uint32_t,    3, 3>
+    , munkres_cpp::matrix_qt            <int64,       3, 3>
+    , munkres_cpp::matrix_qt            <uint64,      3, 3>
+    , munkres_cpp::matrix_qt            <float,       3, 3>
+    , munkres_cpp::matrix_qt            <double,      3, 3>
+    , munkres_cpp::matrix_qt            <long double, 3, 3>
     #endif
     #endif
-    , munkres_cpp::matrix_std_2d_vector <signed             char>
-    , munkres_cpp::matrix_std_2d_vector <unsigned           char>
-    , munkres_cpp::matrix_std_2d_vector <signed   short     int>
-    , munkres_cpp::matrix_std_2d_vector <unsigned short     int>
-    , munkres_cpp::matrix_std_2d_vector <signed             int>
-    , munkres_cpp::matrix_std_2d_vector <unsigned           int>
-    , munkres_cpp::matrix_std_2d_vector <signed   long      int>
-    , munkres_cpp::matrix_std_2d_vector <unsigned long      int>
-    , munkres_cpp::matrix_std_2d_vector <signed   long long int>
-    , munkres_cpp::matrix_std_2d_vector <unsigned long long int>
+    , munkres_cpp::matrix_std_2d_vector <int8_t>
+    , munkres_cpp::matrix_std_2d_vector <uint8_t>
+    , munkres_cpp::matrix_std_2d_vector <int16_t>
+    , munkres_cpp::matrix_std_2d_vector <uint16_t>
+    , munkres_cpp::matrix_std_2d_vector <int32_t>
+    , munkres_cpp::matrix_std_2d_vector <uint32_t>
+    , munkres_cpp::matrix_std_2d_vector <int64_t>
+    , munkres_cpp::matrix_std_2d_vector <uint64_t>
     , munkres_cpp::matrix_std_2d_vector <float>
     , munkres_cpp::matrix_std_2d_vector <double>
     , munkres_cpp::matrix_std_2d_vector <long double>
@@ -150,54 +138,49 @@ TYPED_TEST_SUITE (MunkresTest, MunkresTestTypes);
 
 template <typename T> class MunkresSignedTest : public ::testing::Test {};
 typedef ::testing::Types <
-      munkres_cpp::Matrix               <signed             char>
-    , munkres_cpp::Matrix               <signed   short     int>
-    , munkres_cpp::Matrix               <signed             int>
-    , munkres_cpp::Matrix               <signed   long      int>
-    , munkres_cpp::Matrix               <signed   long long int>
+      munkres_cpp::Matrix               <int8_t>
+    , munkres_cpp::Matrix               <int16_t>
+    , munkres_cpp::Matrix               <int32_t>
+    , munkres_cpp::Matrix               <int64_t>
     , munkres_cpp::Matrix               <float>
     , munkres_cpp::Matrix               <double>
     , munkres_cpp::Matrix               <long double>
     #ifdef MUNKRES_CPP_ARMADILLO
-    , munkres_cpp::matrix_armadillo     <signed   short     int>
-    , munkres_cpp::matrix_armadillo     <signed             int>
-    , munkres_cpp::matrix_armadillo     <signed   long      int>
-    , munkres_cpp::matrix_armadillo     <signed   long long int>
+    , munkres_cpp::matrix_armadillo     <int16_t>
+    , munkres_cpp::matrix_armadillo     <int32_t>
+    , munkres_cpp::matrix_armadillo     <int64_t>
     , munkres_cpp::matrix_armadillo     <float>
     , munkres_cpp::matrix_armadillo     <double>
     #endif
     #ifdef MUNKRES_CPP_BOOST
-    , munkres_cpp::matrix_boost         <signed             char>
-    , munkres_cpp::matrix_boost         <signed   short     int>
-    , munkres_cpp::matrix_boost         <signed             int>
-    , munkres_cpp::matrix_boost         <signed   long      int>
-    , munkres_cpp::matrix_boost         <signed   long long int>
+    , munkres_cpp::matrix_boost         <int8_t>
+    , munkres_cpp::matrix_boost         <int16_t>
+    , munkres_cpp::matrix_boost         <int32_t>
+    , munkres_cpp::matrix_boost         <int64_t>
     , munkres_cpp::matrix_boost         <float>
     , munkres_cpp::matrix_boost         <double>
     , munkres_cpp::matrix_boost         <long double>
     #endif
     #ifdef MUNKRES_CPP_EIGEN3
-    , munkres_cpp::matrix_eigen         <signed             char>
-    , munkres_cpp::matrix_eigen         <signed   short     int>
-    , munkres_cpp::matrix_eigen         <signed             int>
-    , munkres_cpp::matrix_eigen         <signed   long      int>
-    , munkres_cpp::matrix_eigen         <signed   long long int>
+    , munkres_cpp::matrix_eigen         <int8_t>
+    , munkres_cpp::matrix_eigen         <int16_t>
+    , munkres_cpp::matrix_eigen         <int32_t>
+    , munkres_cpp::matrix_eigen         <int64_t>
     , munkres_cpp::matrix_eigen         <float>
     , munkres_cpp::matrix_eigen         <double>
     , munkres_cpp::matrix_eigen         <long double>
     #endif
     #ifdef MUNKRES_CPP_OPENCV
-    , munkres_cpp::matrix_opencv        <signed             char>
-    , munkres_cpp::matrix_opencv        <signed   short     int>
-    , munkres_cpp::matrix_opencv        <signed             int>
+    , munkres_cpp::matrix_opencv        <int8_t>
+    , munkres_cpp::matrix_opencv        <int16_t>
+    , munkres_cpp::matrix_opencv        <int32_t>
     , munkres_cpp::matrix_opencv        <float>
     , munkres_cpp::matrix_opencv        <double>
     #endif
-    , munkres_cpp::matrix_std_2d_vector <signed             char>
-    , munkres_cpp::matrix_std_2d_vector <signed   short     int>
-    , munkres_cpp::matrix_std_2d_vector <signed             int>
-    , munkres_cpp::matrix_std_2d_vector <signed   long      int>
-    , munkres_cpp::matrix_std_2d_vector <signed   long long int>
+    , munkres_cpp::matrix_std_2d_vector <int8_t>
+    , munkres_cpp::matrix_std_2d_vector <int16_t>
+    , munkres_cpp::matrix_std_2d_vector <int32_t>
+    , munkres_cpp::matrix_std_2d_vector <int64_t>
     , munkres_cpp::matrix_std_2d_vector <float>
     , munkres_cpp::matrix_std_2d_vector <double>
     , munkres_cpp::matrix_std_2d_vector <long double>
