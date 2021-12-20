@@ -20,8 +20,9 @@
 #if !defined(_MUNKRES_H_)
 #define _MUNKRES_H_
 
-#include <forward_list>
 #include <algorithm>
+#include <forward_list>
+#include <limits>
 
 
 

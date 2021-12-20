@@ -19,7 +19,6 @@
 #if !defined(__MUNKRES_CPP_MATRIX_BASE_H__)
 #define __MUNKRES_CPP_MATRIX_BASE_H__
 
-#include <limits>
 #include <cmath>
 #include <iterator>
 
