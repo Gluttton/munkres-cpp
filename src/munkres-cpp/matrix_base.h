@@ -19,7 +19,6 @@
 #if !defined(__MUNKRES_CPP_MATRIX_BASE_H__)
 #define __MUNKRES_CPP_MATRIX_BASE_H__
 
-#include <cmath>
 #include <iterator>
 
 
@@ -42,15 +41,6 @@ struct matrix_base
 
     // Default implementation.
     virtual ~matrix_base () = default;
-
-    // Implementation.
-    template <typename V = value_type>
-    constexpr typename std::enable_if<std::is_integral<V>::value, bool>::type
-    is_zero (size_t row, size_t column) const {return operator () (row, column) == 0;}
-
-    template <typename V = value_type>
-    constexpr typename std::enable_if<!std::is_integral<V>::value, bool>::type
-    is_zero (size_t row, size_t column) const {return FP_ZERO == std::fpclassify (operator () (row, column) );}
 
     // Allow to use standard algorithms.
     template <typename M>

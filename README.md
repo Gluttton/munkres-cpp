@@ -173,10 +173,10 @@ The `munkres.h` header file contains the solver sources. The solver takes input 
 The current implementation doesn't depend on a specific matrix type and can be used with an arbitrary data type that meets the following requirements:
  - the container type must implement the subscription operator `operator ()` that takes two parameters (row and column) and return a corresponding element of a matrix;
  - the container type must implement the `columns` and `rows` member functions that return matrix dimension;
- - the container type must implement the `is_zero` member function that allows testing a selected element is it zero;
  - the container type must implement the `begin` and `end` member functions that return appropriate iterators.
 
 Also, the library doesn't require any specific type for a scalar element of the matrix, so any arbitrary data type can be used that meets the following requirements:
+ - the element type must comparable with zero;
  - the element type must implement comparison operators (`<`, `>`);
  - the element type must implement addition and subtraction (`+`, `-`);
  - the element type must implement the assignment operator (`=`).

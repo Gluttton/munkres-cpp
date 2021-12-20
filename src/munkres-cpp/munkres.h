@@ -21,6 +21,7 @@
 #define _MUNKRES_H_
 
 #include <algorithm>
+#include <cmath>
 #include <forward_list>
 #include <limits>
 
@@ -28,6 +29,16 @@
 
 namespace munkres_cpp
 {
+
+template <typename T>
+static constexpr typename std::enable_if<std::is_integral<T>::value, bool>::type
+is_zero (const T & v) {return v == 0;}
+
+template <typename T>
+static constexpr typename std::enable_if<!std::is_integral<T>::value, bool>::type
+is_zero (const T & v) {return FP_ZERO == std::fpclassify (v);}
+
+
 
 template<typename T, template <typename> class M>
 class Munkres
@@ -93,7 +104,7 @@ bool Munkres<T, M>::find_uncovered_in_matrix (size_t & row, size_t & col) const
         if (!col_mask[col])
             for (row = 0; row < size; row++)
                 if (!row_mask[row])
-                    if (matrix.is_zero (row, col) )
+                    if (is_zero (matrix (row, col) ) )
                         return true;
 
     return false;
@@ -106,7 +117,7 @@ int Munkres<T, M>::step1 ()
 {
     for (size_t row = 0; row < size; row++) {
         for (size_t col = 0; col < size; col++) {
-            if (matrix.is_zero (row, col) ) {
+            if (is_zero (matrix (row, col) ) ) {
                 for (size_t nrow = 0; nrow < row; nrow++)
                     if (STAR == mask_matrix (nrow, col) )
                         goto next_column;
@@ -226,7 +237,7 @@ int Munkres<T, M>::step5 ()
         if (!col_mask[col])
             for (size_t row = 0; row < size; row++)
                 if (!row_mask[row])
-                    if (h > matrix (row, col) && !matrix.is_zero (row, col) )
+                    if (h > matrix (row, col) && !is_zero (matrix (row, col) ) )
                         h = matrix (row, col);
 
     for (size_t row = 0; row < size; row++)
