@@ -45,10 +45,10 @@ class Munkres
 {
     public:
         Munkres (M<T> &);
-
-    private:
         Munkres (const Munkres &) = delete;
         Munkres & operator = (const Munkres &) = delete;
+
+    private:
         bool find_uncovered_in_matrix (size_t &, size_t &) const;
         int step1 ();
         int step2 ();
