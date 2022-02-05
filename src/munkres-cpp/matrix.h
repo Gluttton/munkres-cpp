@@ -120,6 +120,10 @@ Matrix<T>::Matrix (size_t rows, size_t columns)
 template<class T>
 Matrix<T> & Matrix<T>::operator= (const Matrix<T> & other)
 {
+    if (this == & other) {
+        return *this;
+    }
+
     if (other.m_matrix != nullptr) {
         resize (other.m_rows, other.m_columns);
         std::copy (other.m_matrix[0], other.m_matrix[0] + m_rows * m_columns, m_matrix[0]);

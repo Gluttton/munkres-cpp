@@ -127,6 +127,22 @@ TEST_F (MatrixTest, operatorAssignment_0x0_Success)
 
 
 
+TEST_F (MatrixTest, operatorAssignment_1x1_self_Success)
+{
+    // Arrange.
+    munkres_cpp::Matrix<double> etalon_matrix {
+        {1.1}
+    };
+
+    // Act.
+    etalon_matrix = etalon_matrix;
+
+    // Assert.
+    EXPECT_EQ (1.1, etalon_matrix (0, 0) );
+}
+
+
+
 TEST_F (MatrixTest, operatorAssignment_3x3_Success)
 {
     // Arrange.
