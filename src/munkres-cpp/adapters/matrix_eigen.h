@@ -29,6 +29,9 @@ template<class T>
 class matrix_eigen : public matrix_base<T>, public Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>
 {
     public:
+        using matrix_base<T>::begin;
+        using matrix_base<T>::end;
+
         matrix_eigen (size_t rows, size_t columns)
             : Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>::Matrix (rows, columns)
         {
