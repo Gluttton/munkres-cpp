@@ -56,8 +56,10 @@ struct TypeHolder
     using matrix_type = M <X>;
 };
 
+#if QT5_FOUND == 1
 template <typename T>
 using matrix_qt33 = munkres_cpp::matrix_qt <T, 3, 3>;
+#endif
 
 template <typename T> class MunkresTest : public ::testing::Test {};
 typedef ::testing::Types <
