@@ -17,7 +17,7 @@ test_job:
         - cd ${BUILD_DIR}/tests && ./munkrestest
         - cd ${BUILD_DIR}
         - make coverage
-        - gcovr --exclude '../tests' --exclude 'tests/googletest' -r ..
+    coverage: /^\s*lines.*:\s*\d+.\d+\%/
     only:
         - devel
         - merge_requests
