@@ -81,11 +81,12 @@ add_test (MunkresCppTest muknrestest)
 # Test coverage report.
 set (Coverage_REPORT ${PROJECT_BINARY_DIR}/coverage.info)
 set (Coverage_DIR    ${PROJECT_BINARY_DIR}/coverage)
+set (LcovRc          "--rc" "lcov_branch_coverage=1")
 add_custom_command (
     OUTPUT  ${Coverage_REPORT}
-    COMMAND lcov -q -c -f -b . -d ${PROJECT_BINARY_DIR}/tests -o ${Coverage_REPORT}
-    COMMAND lcov -e ${Coverage_REPORT} '${PROJECT_SOURCE_DIR}/src/*' -o ${Coverage_REPORT}
-    COMMAND genhtml ${Coverage_REPORT} --legend --demangle-cpp -f -q -o ${Coverage_DIR}
+    COMMAND lcov -q -c -f -b . -d ${PROJECT_BINARY_DIR}/tests -o ${Coverage_REPORT} ${LcovRc}
+    COMMAND lcov -e ${Coverage_REPORT} '${PROJECT_SOURCE_DIR}/src/*' -o ${Coverage_REPORT} ${LcovRc}
+    COMMAND genhtml ${Coverage_REPORT} --legend --demangle-cpp -f -q -o ${Coverage_DIR} ${LcovRc}
     DEPENDS munkrestest
 )
 add_custom_target (coverage DEPENDS ${Coverage_REPORT})
