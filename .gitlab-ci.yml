@@ -11,7 +11,9 @@ test_job:
         - BUILD_DIR=`pwd`/build
         - mkdir -p ${BUILD_DIR}
         - cd ${BUILD_DIR}
-        - cmake -DCMAKE_BUILD_TYPE=Debug ${BUILD_DIR}/..
+        - cmake -DCMAKE_BUILD_TYPE=Debug
+                -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror"
+                ${BUILD_DIR}/..
     script:
         - make tests
         - cd ${BUILD_DIR}/tests && ./munkrestest
