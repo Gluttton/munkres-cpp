@@ -8,7 +8,7 @@ find_package (OpenCV    COMPONENTS  core)
 include (ExternalProject)
 ExternalProject_Add (Celero
     GIT_REPOSITORY "https://github.com/DigitalInBlue/Celero.git"
-    GIT_TAG "v2.8.2"
+    GIT_TAG "v2.8.3"
     PATCH_COMMAND eval "sed 's/CACHE.*FORCE//g' CMakeLists.txt > CMakeLists.mod && mv CMakeLists.mod CMakeLists.txt"
     CMAKE_ARGS "-DCELERO_ENABLE_EXPERIMENTS=OFF;-DCMAKE_BUILD_TYPE=Release"
     SOURCE_DIR "${PROJECT_BINARY_DIR}/Celero"
