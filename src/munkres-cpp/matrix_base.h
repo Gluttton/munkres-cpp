@@ -44,10 +44,11 @@ struct matrix_base
 
     // Allow to use standard algorithms.
     template <typename M>
-    struct iterator : public std::iterator<std::input_iterator_tag, typename M::value_type>
+    struct iterator
     {
         iterator (M & m, size_t r, size_t c) : m {m}, r {r}, c {c} {}
-        typename std::conditional<std::is_const<M>::value, const value_type, value_type>::type &
+        typename std::conditional<std::is_const<M>::value,
+                 const typename M::value_type, typename M::value_type>::type &
              operator * () const {return m (r, c);}
         bool operator == (const iterator & that) {return this->r == that.r && this->c == that.c;}
         bool operator != (const iterator & that) {return ! operator == (that);}
@@ -60,6 +61,12 @@ struct matrix_base
 
         M & m;
         size_t r, c;
+
+        using difference_type   = std::ptrdiff_t;
+        using value_type        = T;
+        using pointer           = T *;
+        using reference         = T &;
+        using iterator_category = std::input_iterator_tag;
     };
 
     template <typename M>
