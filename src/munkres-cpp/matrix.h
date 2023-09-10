@@ -157,10 +157,7 @@ Matrix<T>::~Matrix ()
 template<class T>
 void Matrix<T>::resize (size_t rows, size_t columns, T default_value)
 {
-    // Save array pointer.
-    T ** new_matrix;
-    // Alloc new arrays.
-    new_matrix = new T *[rows]; // Row pointers.
+    T ** new_matrix = new T *[rows]; // Row pointers.
     try {
         new_matrix[0] = new T[rows * columns];  // All data in one stripe.
     }

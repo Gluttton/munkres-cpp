@@ -78,10 +78,10 @@ template<typename T, template <typename> class M>
 void minimize_along_direction (M<T> & matrix, bool over_columns)
 {
     // Look for a minimum value to subtract from all values along the "outer" direction.
-    size_t i, j = 0, size = matrix.rows ();
+    size_t i = 0, j = 0, size = matrix.rows ();
     size_t & r = over_columns ? j : i;
     size_t & c = over_columns ? i : j;
-    for (i = 0; i < size; i++, j = 0) {
+    for (; i < size; i++, j = 0) {
         T min = matrix (r, c);
 
         // As long as the current minimum is greater than zero, keep looking for the minimum.
