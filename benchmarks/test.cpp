@@ -8,8 +8,6 @@
 
 std::vector<munkres_cpp::MUNKRES_CPP_MATRIX_TYPE<MUNKRES_CPP_VALUE_TYPE> *> matrices;
 
-size_t i {0};
-
 
 
 class MunkresFixture : public celero::TestFixture
@@ -20,9 +18,19 @@ class MunkresFixture : public celero::TestFixture
         {
         }
 
-        void setUp (const celero::TestFixture::ExperimentValue &) override
+        std::vector <celero::TestFixture::ExperimentValue> getExperimentValues () const override
         {
-            matrix = * matrices [i];
+            read (matrices);
+            std::vector <celero::TestFixture::ExperimentValue> problemSpace;
+            for (size_t i = 0; i < matrices.size (); ++i) {
+                problemSpace.push_back (i);
+            }
+            return problemSpace;
+        }
+
+        void onExperimentStart (const celero::TestFixture::ExperimentValue & e) override
+        {
+            matrix = * matrices [e.Value];
         }
 
         munkres_cpp::MUNKRES_CPP_MATRIX_TYPE<MUNKRES_CPP_VALUE_TYPE> matrix;
@@ -30,19 +38,11 @@ class MunkresFixture : public celero::TestFixture
 
 
 
-BASELINE_F (Munkres, Solve, MunkresFixture, 5000, 1)
+BASELINE_F (Munkres, Solve, MunkresFixture, 128, 32)
 {
     munkres_cpp::Munkres<MUNKRES_CPP_VALUE_TYPE, munkres_cpp::MUNKRES_CPP_MATRIX_TYPE> munkres (matrix);
 }
 
 
 
-int main (int argc, char * argv [])
-{
-    read (matrices);
-
-    while (i < matrices.size () ) {
-        celero::Run (argc, argv);
-        ++i;
-    }
-}
+CELERO_MAIN
