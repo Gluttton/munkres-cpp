@@ -428,9 +428,9 @@ To get comparable results it's required to generate data set wich will be used f
 $ benchmarks/generator {dim_1 dim_2 ... dim_n}
 ```
 Where every ```dim_x``` parameter generate square matrix dith ```dim_x``` dimension.
-To launch microbenchmark performs any following command:
+To launch microbenchmark performs the following command:
 ```
-$ benchmarks/tests/munkresbenchmark
+$ benchmarks/munkresbenchmark
 ```
 
 
