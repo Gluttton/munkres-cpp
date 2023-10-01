@@ -58,6 +58,10 @@ add_executable (munkresbenchmark
     EXCLUDE_FROM_ALL ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp
 )
 
+target_compile_options (munkresbenchmark
+    PRIVATE -O3
+)
+
 target_compile_definitions (munkresbenchmark
     PRIVATE -DARMADILLO_FOUND=$<BOOL:${ARMADILLO_FOUND}>
     PRIVATE -DBOOST_FOUND=$<BOOL:${BOOST_FOUND}>
