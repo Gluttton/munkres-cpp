@@ -147,7 +147,9 @@ std::istream & read_matrix (std::istream & is, T & m)
                 T n (rows, columns);
                 for (size_t row = 0; row < rows; ++row) {
                     for (size_t col = 0; col < columns; ++col) {
-                        is >> n (row, col);
+                        unsigned long int x = 0;
+                        is >> x;
+                        n (row, col) = static_cast <typename T::matrix_base::value_type> (x);
                     }
                 }
                 m = n;
