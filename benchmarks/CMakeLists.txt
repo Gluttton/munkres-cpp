@@ -23,10 +23,10 @@ set (CELERO_LIBRARY "${PROJECT_BINARY_DIR}/CeleroBuild/libcelero.so")
 
 
 if (NOT DEFINED MUNKRES_CPP_VALUE_TYPE)
-    set (MUNKRES_CPP_VALUE_TYPE long\ unsigned\ int)
+    set (MUNKRES_CPP_VALUE_TYPE float)
 endif ()
 if (NOT DEFINED MUNKRES_CPP_MATRIX_TYPE)
-    set (MUNKRES_CPP_MATRIX_TYPE matrix_eigen)
+    set (MUNKRES_CPP_MATRIX_TYPE Matrix)
 endif ()
 
 
