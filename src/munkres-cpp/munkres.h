@@ -17,8 +17,8 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-#if !defined(_MUNKRES_H_)
-#define _MUNKRES_H_
+#if !defined(MUNKRES_CPP_MUNKRES_H)
+#define MUNKRES_CPP_MUNKRES_H
 
 #include <algorithm>
 #include <cmath>
@@ -324,4 +324,4 @@ Munkres<T, M>::Munkres (M<T> & matrix)
 
 }// namespace munkres_cpp
 
-#endif /* !defined(_MUNKRES_H_) */
+#endif /* !defined(MUNKRES_CPP_MUNKRES_H) */

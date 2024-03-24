@@ -1,5 +1,5 @@
-#if !defined(__MUNKRES_CPP_UTILS_H__)
-#define __MUNKRES_CPP_UTILS_H__
+#if !defined(MUNKRES_CPP_UTILS_H)
+#define MUNKRES_CPP_UTILS_H
 
 #include <algorithm>
 #include <cmath>
@@ -55,4 +55,4 @@ typename std::enable_if<std::is_signed<T>::value, bool>::type is_data_valid (con
 
 }// namespace munkres_cpp
 
-#endif /* !defined(__MUNKRES_CPP_UTILS_H__) */
+#endif /* !defined(MUNKRES_CPP_UTILS_H) */

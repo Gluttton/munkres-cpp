@@ -16,8 +16,8 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-#if !defined(__MUNKRES_CPP_MATRIX_BASE_H__)
-#define __MUNKRES_CPP_MATRIX_BASE_H__
+#if !defined(MUNKRES_CPP_MATRIX_BASE_H)
+#define MUNKRES_CPP_MATRIX_BASE_H
 
 #include <iterator>
 
@@ -80,4 +80,4 @@ struct matrix_base
 
 }// namespace munkres_cpp
 
-#endif /* !defined(__MUNKRES_CPP_MATRIX_BASE_H__) */
+#endif /* !defined(MUNKRES_CPP_MATRIX_BASE_H) */

@@ -17,8 +17,8 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-#if !defined(_MATRIX_H_)
-#define _MATRIX_H_
+#if !defined(MUNKRES_CPP_MATRIX_H)
+#define MUNKRES_CPP_MATRIX_H
 
 #include "munkres-cpp/matrix_base.h"
 #include <initializer_list>
@@ -194,4 +194,4 @@ void Matrix<T>::resize (size_t rows, size_t columns, T default_value)
 
 }// namespace munkres_cpp
 
-#endif /* !defined(_MATRIX_H_) */
+#endif /* !defined(MUNKRES_CPP_MATRIX_H) */
