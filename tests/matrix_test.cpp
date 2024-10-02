@@ -151,7 +151,7 @@ TEST_F (MatrixTest, operatorAssignment_3x3_Success)
         {1.0, 1.1, 1.2},
         {2.0, 2.1, 2.2}
     };
-    munkres_cpp::Matrix<double> test_matrix;
+    munkres_cpp::Matrix<double> test_matrix {};
 
     // Act.
     test_matrix = etalon_matrix;

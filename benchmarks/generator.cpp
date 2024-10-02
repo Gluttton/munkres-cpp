@@ -8,7 +8,7 @@ int main (int argc, char * argv [])
     std::vector<matrix_t *> matrices;
     for (int i = 1; i < argc; ++i) {
         const size_t size = std::stoi (argv [i]);
-        matrix_t * matrix = new matrix_t;
+        matrix_t * matrix = new matrix_t {};
         * matrix = generate_random_matrix<matrix_t>(size, size);
         matrices.push_back (matrix);
     }

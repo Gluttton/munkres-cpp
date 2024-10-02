@@ -33,7 +33,6 @@ template<class T>
 class Matrix : public matrix_base<T>
 {
     public:
-        Matrix () = default;
         Matrix (size_t, size_t);
         Matrix (const std::initializer_list<std::initializer_list<T>> &);
         Matrix (const Matrix<T> &);
@@ -74,7 +73,6 @@ class Matrix : public matrix_base<T>
 
 template<class T>
 Matrix<T>::Matrix (const std::initializer_list<std::initializer_list<T>> & init)
-    : Matrix<T> ()
 {
     m_rows = init.size ();
     if (m_rows) {
@@ -98,7 +96,6 @@ Matrix<T>::Matrix (const std::initializer_list<std::initializer_list<T>> & init)
 
 template<class T>
 Matrix<T>::Matrix (const Matrix<T> & other)
-    : Matrix<T> ()
 {
     if (other.m_matrix) {
         resize (other.m_rows, other.m_columns);
@@ -110,7 +107,6 @@ Matrix<T>::Matrix (const Matrix<T> & other)
 
 template<class T>
 Matrix<T>::Matrix (size_t rows, size_t columns)
-    : Matrix<T> ()
 {
     resize (rows, columns);
 }
