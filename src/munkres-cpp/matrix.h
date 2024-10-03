@@ -73,8 +73,8 @@ class Matrix : public matrix_base<T>
 
 template<class T>
 Matrix<T>::Matrix (const std::initializer_list<std::initializer_list<T>> & init)
+    : m_rows {init.size ()}
 {
-    m_rows = init.size ();
     if (m_rows) {
         m_columns = init.begin ()->size ();
         if (m_columns > 0) {
