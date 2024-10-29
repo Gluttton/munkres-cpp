@@ -62,8 +62,8 @@ class Munkres
         M<char> mask_matrix;
         bool * const row_mask;
         bool * const col_mask;
-        size_t saverow;
-        size_t savecol;
+        size_t saverow {0};
+        size_t savecol {0};
         enum MASK : char
         {
             NORMAL
@@ -268,8 +268,6 @@ Munkres<T, M>::Munkres (M<T> & matrix)
     , mask_matrix {size, size}
     , row_mask {new bool[size]}
     , col_mask {new bool[size]}
-    , saverow {0}
-    , savecol {0}
 {
     const size_t rows = matrix.rows ();
     const size_t columns = matrix.columns ();
