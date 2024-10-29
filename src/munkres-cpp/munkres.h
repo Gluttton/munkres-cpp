@@ -79,8 +79,8 @@ void minimize_along_direction (M<T> & matrix, bool over_columns)
 {
     // Look for a minimum value to subtract from all values along the "outer" direction.
     size_t i = 0, j = 0, size = matrix.rows ();
-    size_t & r = over_columns ? j : i;
-    size_t & c = over_columns ? i : j;
+    const size_t & r = over_columns ? j : i;
+    const size_t & c = over_columns ? i : j;
     for (; i < size; i++, j = 0) {
         T min = matrix (r, c);
 
