@@ -196,7 +196,7 @@ int Munkres<T, M>::step4 ()
     for (size_t i = 0; dim [i] < size; ++dim [i]) {
         if (mask_matrix (dim [0], dim [1]) == mask [i]) {
             // We have to find these two pairs: z1 and z2n.
-            seq.push_front ({dim [0], dim [1]});
+            seq.emplace_front (dim [0], dim [1]);
             i = (i + 1) & 1;    // Switch dimension.
             dim [i] = -1;       // After increment this value becames zero.
         }
